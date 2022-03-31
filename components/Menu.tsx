@@ -3,6 +3,25 @@ import Button from "@mui/material/Button";
 import MuiMenu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
+import Link from "next/link";
+interface Page {
+  display: string;
+  slug: string;
+  id: string;
+}
+
+const pages: Page[] = [
+  {
+    display: "About",
+    slug: "about",
+    id: "ce883664-8fdf-4a2a-9e41-ee5e774111ed",
+  },
+  {
+    display: "Contact",
+    slug: "contact",
+    id: "8226722c-bdf0-4256-8696-23a25af1a2fc",
+  },
+];
 
 export default function Menu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -12,6 +31,15 @@ export default function Menu() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const makePages = (pages: Page[]) => {
+    return pages.map((page) => {
+      return (
+        <Link href={`/${page.slug}`} key={page.id}>
+          <MenuItem onClick={handleClick}>{page.display}</MenuItem>
+        </Link>
+      );
+    });
   };
 
   return (
@@ -34,9 +62,7 @@ export default function Menu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        {makePages(pages)}
       </MuiMenu>
     </div>
   );

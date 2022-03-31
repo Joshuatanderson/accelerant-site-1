@@ -4,7 +4,6 @@ import styled from "styled-components";
 import logo from "../public/logo.png";
 import Image from "next/image";
 import { Box, Button } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 
 import Menu from "./Menu";
 
