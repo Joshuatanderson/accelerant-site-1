@@ -1,8 +1,6 @@
-export const lightTheme = {
-    typography: {
-        default: {
-            fontFamily: "Poppins, sans-serif"
-        }
-    }
-}
+import { createTheme } from "@mui/material";
+
+export const lightTheme = createTheme(
+    
+)
 
