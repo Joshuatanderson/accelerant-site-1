@@ -1,24 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 
-import { lightTheme } from "../themeOptions";
 import logo from "../public/logo.png";
 import Image from "next/image";
+import { Box, Button } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
-const HeaderCont = styled.div({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  height: "120px",
-  fontFamily: "Poppins",
-  fontSize: 20,
-});
+import Menu from "./Menu";
 
-const ImgCont = styled.div({});
+const classes = {
+  headerCont: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+};
 
 const Header = () => {
   return (
-    <HeaderCont>
+    <Box sx={classes.headerCont}>
       <Image
         layout="fixed"
         width={104.3}
@@ -26,8 +26,8 @@ const Header = () => {
         src={logo}
         alt="Accelerant"
       />
-      <p>Accelerant</p>
-    </HeaderCont>
+      <Menu />
+    </Box>
   );
 };
 
