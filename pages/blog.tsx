@@ -10,9 +10,11 @@ export default function Blog({ posts }: BlogProps) {
       {posts.map(({ frontmatter: { title, description, date }, slug }) => (
         <article key={title}>
           <header>
-            <h3 className="mb-1 text-3xl font-semibold text-orange-600">
+            <h3 className="mb-2">
               <Link href={"/post/[slug]"} as={`/post/${slug}`}>
-                {title}
+                <a className="mb-1 text-3xl font-semibold text-orange-600 no-underline">
+                  {title}
+                </a>
               </Link>
             </h3>
             <span className="mb-4 text-sm">{date}</span>
