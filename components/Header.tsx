@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Box, Button } from "@mui/material";
 
 import Menu from "./Menu";
+import Link from "next/link";
 
 const classes = {
   headerCont: {
@@ -18,13 +19,15 @@ const classes = {
 const Header = () => {
   return (
     <Box sx={classes.headerCont}>
-      <Image
-        layout="fixed"
-        width={104.3}
-        height={24.9}
-        src={logo}
-        alt="Accelerant"
-      />
+      <Link href="/">
+        <Image
+          layout="fixed"
+          width={104.3}
+          height={24.9}
+          src={logo}
+          alt="Accelerant"
+        />
+      </Link>
       <Menu />
     </Box>
   );
