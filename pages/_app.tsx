@@ -1,7 +1,6 @@
-import "../styles/globals.css";
+import "../styles/globals.scss";
 import type { AppProps } from "next/app";
-import { ThemeProvider } from "@emotion/react";
-import { lightTheme } from "../themeOptions";
+import "../styles/tailwind.scss";
 import { Box, CssBaseline } from "@mui/material";
 import Header from "../components/Header";
 

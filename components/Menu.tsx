@@ -21,6 +21,11 @@ const pages: Page[] = [
     slug: "contact",
     id: "8226722c-bdf0-4256-8696-23a25af1a2fc",
   },
+  {
+    display: "Blog",
+    slug: "blog",
+    id: "1d00cee1-9b38-41d5-a783-3245136a08ee",
+  },
 ];
 
 export default function Menu() {
