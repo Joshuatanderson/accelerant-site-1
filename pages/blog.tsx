@@ -19,19 +19,19 @@ interface FrontMatter {
 export default function Blog({ posts }: Blog) {
   return (
     <Layout>
-      <div>
-        {posts.map(({ frontmatter: { title, description, date } }) => (
-          <article key={title}>
-            <header>
-              <h3>{title}</h3>
-              <span>{date}</span>
-            </header>
-            <section>
-              <p>{description}</p>
-            </section>
-          </article>
-        ))}
-      </div>
+      {posts.map(({ frontmatter: { title, description, date } }) => (
+        <article key={title}>
+          <header>
+            <h3 className="mb-1 text-3xl font-semibold text-orange-600">
+              {title}
+            </h3>
+            <span className="mb-4 text-sm">{date}</span>
+          </header>
+          <section>
+            <p className="mb-8">{description}</p>
+          </section>
+        </article>
+      ))}
     </Layout>
   );
 }

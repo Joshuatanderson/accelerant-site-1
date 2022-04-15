@@ -14,13 +14,7 @@ export default function Layout(props: any) {
       </Link>
     </h1>
   ) : (
-    <h1 className="mb-2">
-      <Link href="/">
-        <a className="text-2xl font-black text-black no-underline">
-          Next.Js Starter Blog
-        </a>
-      </Link>
-    </h1>
+    <h1 className="mb-2">Next.Js Starter Blog</h1>
   );
 
   return (
