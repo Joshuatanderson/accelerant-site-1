@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 
 import { Post as PostProps } from "../../types/blogPost";
 import Layout from "../../components/Layout";
+import Image from "next/image";
 
 interface GetStaticProps {
   params: {
@@ -13,11 +14,15 @@ interface GetStaticProps {
   };
 }
 
+const mdImage = (img: any) => (
+  <Image src={img.src} alt={img.alt} width={1} height={1} layout="responsive" />
+);
+
 export default function Post({ content, frontmatter }: PostProps) {
   return (
     <Layout>
       <article>
-        <ReactMarkdown>{content}</ReactMarkdown>
+        <ReactMarkdown components={{ img: mdImage }}>{content}</ReactMarkdown>
       </article>
     </Layout>
   );

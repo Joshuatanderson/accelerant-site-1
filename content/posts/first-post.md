@@ -11,3 +11,5 @@ updatedAt: "2020-04-16"
 ### h3
 
 Normal text
+
+![parrot](/dalle_parrot.jpeg)
