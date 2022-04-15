@@ -29,9 +29,9 @@ const pages: Page[] = [
 ];
 
 export default function Menu() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = React.useState<null | EventTarget>(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event: MouseEvent) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
@@ -40,8 +40,8 @@ export default function Menu() {
   const makePages = (pages: Page[]) => {
     return pages.map((page) => {
       return (
-        <Link href={`/${page.slug}`} key={page.id}>
-          <MenuItem onClick={handleClick}>{page.display}</MenuItem>
+        <Link href={`/${page.slug}`} key={page.id} onClick={handleClick}>
+          <MenuItem>{page.display}</MenuItem>
         </Link>
       );
     });
