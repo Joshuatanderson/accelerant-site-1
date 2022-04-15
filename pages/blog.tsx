@@ -1,29 +1,19 @@
 import fs from "fs";
 import matter from "gray-matter";
+import Link from "next/link";
 import Layout from "../components/Layout";
+import { Blog as BlogProps } from "../types/blogPost";
 
-interface Blog {
-  posts: Post[];
-}
-
-interface Post {
-  frontmatter: FrontMatter;
-}
-
-interface FrontMatter {
-  title: string;
-  description: string;
-  date: string;
-}
-
-export default function Blog({ posts }: Blog) {
+export default function Blog({ posts }: BlogProps) {
   return (
     <Layout>
-      {posts.map(({ frontmatter: { title, description, date } }) => (
+      {posts.map(({ frontmatter: { title, description, date }, slug }) => (
         <article key={title}>
           <header>
             <h3 className="mb-1 text-3xl font-semibold text-orange-600">
-              {title}
+              <Link href={"/post/[slug]"} as={`/post/${slug}`}>
+                {title}
+              </Link>
             </h3>
             <span className="mb-4 text-sm">{date}</span>
           </header>
@@ -50,14 +40,13 @@ export async function getStaticProps() {
     const options = { year: "numeric", month: "long", day: "numeric" };
     const formattedDate = new Date(data.updatedAt).toLocaleDateString(
       "en-US"
-      //   options
+      // options
     );
 
     const frontmatter = {
       ...data,
       date: formattedDate,
     };
-    console.log(frontmatter.date);
 
     return {
       slug: filename.replace(".md", ""),

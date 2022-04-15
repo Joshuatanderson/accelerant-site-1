@@ -7,6 +7,9 @@ const purgecss = [
 ];
 
 module.exports = {
+  theme: {
+    extend: {},
+  },
   plugins: [
     "postcss-import",
     "tailwindcss",
@@ -17,4 +20,7 @@ module.exports = {
     './pages/**/*.{html,tsx}',
     './components/**/*.{html,tsx}',
   ],
+  corePlugins: {
+    preflight: false,
+  },
 };
