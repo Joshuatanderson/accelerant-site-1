@@ -31,16 +31,19 @@ const pages: Page[] = [
 export default function Menu() {
   const [anchorEl, setAnchorEl] = React.useState<null | EventTarget>(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event: MouseEvent) => {
+
+  const handleClick = (event: React.MouseEvent) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+    console.log("handling close");
   };
+
   const makePages = (pages: Page[]) => {
     return pages.map((page) => {
       return (
-        <Link href={`/${page.slug}`} key={page.id} onClick={handleClick}>
+        <Link href={`/${page.slug}`} key={page.id}>
           <MenuItem>{page.display}</MenuItem>
         </Link>
       );
@@ -48,27 +51,30 @@ export default function Menu() {
   };
 
   return (
-    <div>
+    <>
       <Button
         id="basic-button"
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
+        onClick={(e) => handleClick(e)}
       >
         <MenuIcon />
       </Button>
-      <MuiMenu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
-      >
-        {makePages(pages)}
-      </MuiMenu>
-    </div>
+      {anchorEl && (
+        <MuiMenu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={() => handleClose()}
+          onClick={() => handleClose()}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+        >
+          {makePages(pages)}
+        </MuiMenu>
+      )}
+    </>
   );
 }
