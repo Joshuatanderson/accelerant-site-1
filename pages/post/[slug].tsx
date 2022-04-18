@@ -70,13 +70,6 @@ export async function getStaticProps({ params: { slug } }: GetStaticProps) {
 
   const { data, content } = matter(markdownWithMetadata);
 
-  // Convert post date to format: Month day, Year
-  const options = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-
   const formattedDate = new Date(data.updatedAt).toDateString();
 
   const frontmatter = {
