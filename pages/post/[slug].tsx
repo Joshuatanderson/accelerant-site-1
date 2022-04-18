@@ -3,6 +3,8 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkUnwrapImages from "remark-unwrap-images";
 
 import { Post as PostProps } from "../../types/blogPost";
 import Layout from "../../components/Layout";
@@ -14,15 +16,30 @@ interface GetStaticProps {
   };
 }
 
-const mdImage = (img: any) => (
-  <Image src={img.src} alt={img.alt} width={1} height={1} layout="responsive" />
-);
+const mdImage = (img: any) =>
+  img.title ? (
+    <figure>
+      <Image {...img} width={1} height={1} layout="responsive" />
+      <div className="flex flex-col items-center justify-center">
+        <div className="text-center">
+          <figcaption>{img.title}</figcaption>
+        </div>
+      </div>
+    </figure>
+  ) : (
+    <Image {...img} width={1} height={1} layout="responsive" />
+  );
 
 export default function Post({ content, frontmatter }: PostProps) {
   return (
     <Layout>
       <article>
-        <ReactMarkdown components={{ img: mdImage }}>{content}</ReactMarkdown>
+        <ReactMarkdown
+          components={{ img: mdImage }}
+          remarkPlugins={[remarkGfm, remarkUnwrapImages]}
+        >
+          {content}
+        </ReactMarkdown>
       </article>
     </Layout>
   );

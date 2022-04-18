@@ -12,4 +12,4 @@ updatedAt: "2020-04-16"
 
 Normal text
 
-![parrot](/dalle_parrot.jpeg)
+![parrot](/dalle_parrot.jpeg "Dalle Parrot")

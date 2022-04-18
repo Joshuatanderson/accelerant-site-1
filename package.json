@@ -25,6 +25,8 @@
     "react-dom": "18.0.0",
     "react-markdown": "^8.0.2",
     "react-typography": "^0.16.20",
+    "remark-gfm": "^3.0.1",
+    "remark-unwrap-images": "^3.0.1",
     "sass": "^1.50.0",
     "styled-components": "^5.3.5",
     "typeface-quattrocento-sans": "^1.1.13",
