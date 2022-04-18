@@ -6,7 +6,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
 
-import { Post as PostProps } from "../../types/blogPost";
+import { FrontMatter, Post as PostProps } from "../../types/blogPost";
 import Layout from "../../components/Layout";
 import Image from "next/image";
 
@@ -15,6 +15,9 @@ interface GetStaticProps {
     slug: string;
   };
 }
+
+const byline = (author: string, date: string) =>
+  `${author}.  Last updated on ${date}.`;
 
 const mdImage = (img: any) =>
   img.title ? (
@@ -68,11 +71,13 @@ export async function getStaticProps({ params: { slug } }: GetStaticProps) {
   const { data, content } = matter(markdownWithMetadata);
 
   // Convert post date to format: Month day, Year
-  // const options = { year: "numeric", month: "long", day: "numeric" };
-  const formattedDate = new Date(data.updatedAt).toLocaleDateString(
-    "en-US"
-    // options
-  );
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+
+  const formattedDate = new Date(data.updatedAt).toDateString();
 
   const frontmatter = {
     ...data,
@@ -81,7 +86,10 @@ export async function getStaticProps({ params: { slug } }: GetStaticProps) {
 
   return {
     props: {
-      content: `# ${data.title}\n${content}`,
+      content: `# ${data.title}\n${byline(
+        data.author,
+        formattedDate
+      )}\n${content}`,
       frontmatter,
     },
   };
