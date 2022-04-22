@@ -3,11 +3,11 @@ import React from "react";
 const terms = () => {
   return (
     <div>
-      <h1>TERMS OF SERVICE</h1> <h2> TLDR:</h2> We won't sell your data. :) We
-      do use Google Analytics. And if you want to read the legal jargon... good
-      luck.<h2> OVERVIEW </h2>This website is operated by Accelerant Education
-      LLC. Throughout the site, the terms “we”, “us” and “our” refer to
-      Accelerant Education LLC. Accelerant Education LLC offers this website,
+      <h1>TERMS OF SERVICE</h1> <h2> TLDR:</h2> We won&apos;t sell your data. :)
+      We do use Google Analytics. And if you want to read the legal jargon...
+      good luck.<h2> OVERVIEW </h2>This website is operated by Accelerant
+      Education LLC. Throughout the site, the terms “we”, “us” and “our” refer
+      to Accelerant Education LLC. Accelerant Education LLC offers this website,
       including all information, tools and services available from this site to
       you, the user, conditioned upon your acceptance of all terms, conditions,
       policies and notices stated here. By visiting our site and/ or purchasing
@@ -77,18 +77,18 @@ const terms = () => {
       subject to return or exchange only according to our Return Policy. We have
       made every effort to display as accurately as possible the colors and
       images of our products that appear at the store. We cannot guarantee that
-      your computer monitor's display of any color will be accurate. We reserve
-      the right, but are not obligated, to limit the sales of our products or
-      Services to any person, geographic region or jurisdiction. We may exercise
-      this right on a case-by-case basis. We reserve the right to limit the
-      quantities of any products or services that we offer. All descriptions of
-      products or product pricing are subject to change at anytime without
-      notice, at the sole discretion of us. We reserve the right to discontinue
-      any product at any time. Any offer for any product or service made on this
-      site is void where prohibited. We do not warrant that the quality of any
-      products, services, information, or other material purchased or obtained
-      by you will meet your expectations, or that any errors in the Service will
-      be corrected.{" "}
+      your computer monitor&apos;s display of any color will be accurate. We
+      reserve the right, but are not obligated, to limit the sales of our
+      products or Services to any person, geographic region or jurisdiction. We
+      may exercise this right on a case-by-case basis. We reserve the right to
+      limit the quantities of any products or services that we offer. All
+      descriptions of products or product pricing are subject to change at
+      anytime without notice, at the sole discretion of us. We reserve the right
+      to discontinue any product at any time. Any offer for any product or
+      service made on this site is void where prohibited. We do not warrant that
+      the quality of any products, services, information, or other material
+      purchased or obtained by you will meet your expectations, or that any
+      errors in the Service will be corrected.{" "}
       <h3> SECTION 6 - ACCURACY OF BILLING AND ACCOUNT INFORMATION</h3> We
       reserve the right to refuse any order you place with us. We may, in our
       sole discretion, limit or cancel quantities purchased per person, per
@@ -127,37 +127,37 @@ const terms = () => {
       or services of third-parties. We are not liable for any harm or damages
       related to the purchase or use of goods, services, resources, content, or
       any other transactions made in connection with any third-party websites.
-      Please review carefully the third-party's policies and practices and make
-      sure you understand them before you engage in any transaction. Complaints,
-      claims, concerns, or questions regarding third-party products should be
-      directed to the third-party.{" "}
+      Please review carefully the third-party&apos;s policies and practices and
+      make sure you understand them before you engage in any transaction.
+      Complaints, claims, concerns, or questions regarding third-party products
+      should be directed to the third-party.{" "}
       <h3>SECTION 9 - USER COMMENTS, FEEDBACK AND OTHER SUBMISSIONS</h3> If, at
       our request, you send certain specific submissions (for example contest
       entries) or without a request from us you send creative ideas,
       suggestions, proposals, plans, or other materials, whether online, by
-      email, by postal mail, or otherwise (collectively, 'comments'), you agree
-      that we may, at any time, without restriction, edit, copy, publish,
-      distribute, translate and otherwise use in any medium any comments that
-      you forward to us. We are and shall be under no obligation (1) to maintain
-      any comments in confidence; (2) to pay compensation for any comments; or
-      (3) to respond to any comments. We may, but have no obligation to,
-      monitor, edit or remove content that we determine in our sole discretion
-      are unlawful, offensive, threatening, libelous, defamatory, pornographic,
-      obscene or otherwise objectionable or violates any party’s intellectual
-      property or these Terms of Service. You agree that your comments will not
-      violate any right of any third-party, including copyright, trademark,
-      privacy, personality or other personal or proprietary right. You further
-      agree that your comments will not contain libelous or otherwise unlawful,
-      abusive or obscene material, or contain any computer virus or other
-      malware that could in any way affect the operation of the Service or any
-      related website. You may not use a false e-mail address, pretend to be
-      someone other than yourself, or otherwise mislead us or third-parties as
-      to the origin of any comments. You are solely responsible for any comments
-      you make and their accuracy. We take no responsibility and assume no
-      liability for any comments posted by you or any third-party.{" "}
-      <h3> SECTION 10 - PERSONAL INFORMATION</h3> Your submission of personal
-      information through the store is governed by our Privacy Policy. To view
-      our Privacy Policy.
+      email, by postal mail, or otherwise (collectively, &apos;comments&apos;),
+      you agree that we may, at any time, without restriction, edit, copy,
+      publish, distribute, translate and otherwise use in any medium any
+      comments that you forward to us. We are and shall be under no obligation
+      (1) to maintain any comments in confidence; (2) to pay compensation for
+      any comments; or (3) to respond to any comments. We may, but have no
+      obligation to, monitor, edit or remove content that we determine in our
+      sole discretion are unlawful, offensive, threatening, libelous,
+      defamatory, pornographic, obscene or otherwise objectionable or violates
+      any party’s intellectual property or these Terms of Service. You agree
+      that your comments will not violate any right of any third-party,
+      including copyright, trademark, privacy, personality or other personal or
+      proprietary right. You further agree that your comments will not contain
+      libelous or otherwise unlawful, abusive or obscene material, or contain
+      any computer virus or other malware that could in any way affect the
+      operation of the Service or any related website. You may not use a false
+      e-mail address, pretend to be someone other than yourself, or otherwise
+      mislead us or third-parties as to the origin of any comments. You are
+      solely responsible for any comments you make and their accuracy. We take
+      no responsibility and assume no liability for any comments posted by you
+      or any third-party. <h3> SECTION 10 - PERSONAL INFORMATION</h3> Your
+      submission of personal information through the store is governed by our
+      Privacy Policy. To view our Privacy Policy.
       <h3> SECTION 11 - ERRORS, INACCURACIES AND OMISSIONS</h3> Occasionally
       there may be information on our site or in the Service that contains
       typographical errors, inaccuracies or omissions that may relate to product
@@ -201,28 +201,28 @@ const terms = () => {
       without notice to you. You expressly agree that your use of, or inability
       to use, the service is at your sole risk. The service and all products and
       services delivered to you through the service are (except as expressly
-      stated by us) provided 'as is' and 'as available' for your use, without
-      any representation, warranties or conditions of any kind, either express
-      or implied, including all implied warranties or conditions of
-      merchantability, merchantable quality, fitness for a particular purpose,
-      durability, title, and non-infringement. In no case shall Accelerant
-      Education LLC, our directors, officers, employees, affiliates, agents,
-      contractors, interns, suppliers, service providers or licensors be liable
-      for any injury, loss, claim, or any direct, indirect, incidental,
-      punitive, special, or consequential damages of any kind, including,
-      without limitation lost profits, lost revenue, lost savings, loss of data,
-      replacement costs, or any similar damages, whether based in contract, tort
-      (including negligence), strict liability or otherwise, arising from your
-      use of any of the service or any products procured using the service, or
-      for any other claim related in any way to your use of the service or any
-      product, including, but not limited to, any errors or omissions in any
-      content, or any loss or damage of any kind incurred as a result of the use
-      of the service or any content (or product) posted, transmitted, or
-      otherwise made available via the service, even if advised of their
-      possibility. Because some states or jurisdictions do not allow the
-      exclusion or the limitation of liability for consequential or incidental
-      damages, in such states or jurisdictions, our liability shall be limited
-      to the maximum extent permitted by law.{" "}
+      stated by us) provided &apos;as is&apos; and &apos;as available&apos; for
+      your use, without any representation, warranties or conditions of any
+      kind, either express or implied, including all implied warranties or
+      conditions of merchantability, merchantable quality, fitness for a
+      particular purpose, durability, title, and non-infringement. In no case
+      shall Accelerant Education LLC, our directors, officers, employees,
+      affiliates, agents, contractors, interns, suppliers, service providers or
+      licensors be liable for any injury, loss, claim, or any direct, indirect,
+      incidental, punitive, special, or consequential damages of any kind,
+      including, without limitation lost profits, lost revenue, lost savings,
+      loss of data, replacement costs, or any similar damages, whether based in
+      contract, tort (including negligence), strict liability or otherwise,
+      arising from your use of any of the service or any products procured using
+      the service, or for any other claim related in any way to your use of the
+      service or any product, including, but not limited to, any errors or
+      omissions in any content, or any loss or damage of any kind incurred as a
+      result of the use of the service or any content (or product) posted,
+      transmitted, or otherwise made available via the service, even if advised
+      of their possibility. Because some states or jurisdictions do not allow
+      the exclusion or the limitation of liability for consequential or
+      incidental damages, in such states or jurisdictions, our liability shall
+      be limited to the maximum extent permitted by law.{" "}
       <h3> SECTION 14 - INDEMNIFICATION</h3> You agree to indemnify, defend and
       hold harmless Accelerant Education LLC and our parent, subsidiaries,
       affiliates, partners, officers, directors, agents, contractors, licensors,

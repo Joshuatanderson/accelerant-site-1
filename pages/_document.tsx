@@ -1,5 +1,6 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import React from "react";
+// @ts-ignore
 import { TypographyStyle } from "react-typography";
 import typography from "../utils/typography";
 

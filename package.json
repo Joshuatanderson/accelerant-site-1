@@ -6,10 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "build:styles": "postcss src/styles/tailwind.scss -o src/styles.scss",
-    "prebuild": "yarn build:styles",
-    "prestart": "yarn build:styles"
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/css": "^11.7.1",

@@ -4,11 +4,11 @@ const privacy = () => {
   return (
     <div>
       <h1>Accelerant Education LLC Privacy Policy</h1>
-      <h2> TLDR:</h2> We won't sell your data. :) We do use Google Analytics.
-      And if you want to read the legal jargon... good luck. This Privacy Policy
-      describes how your personal information is collected, used, and shared
-      when you visit or make a purchase from acceleranteducation.com (the
-      “Site”).
+      <h2> TLDR:</h2> We won&apos;t sell your data. :) We do use Google
+      Analytics. And if you want to read the legal jargon... good luck. This
+      Privacy Policy describes how your personal information is collected, used,
+      and shared when you visit or make a purchase from acceleranteducation.com
+      (the “Site”).
       <h2>PERSONAL INFORMATION WE COLLECT</h2> When you visit the Site, we
       automatically collect certain information about your device, including
       information about your web browser, IP address, time zone, and some of the
