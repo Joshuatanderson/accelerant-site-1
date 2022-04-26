@@ -1,62 +1,57 @@
-import fs from "fs";
-import matter from "gray-matter";
 import Link from "next/link";
 import Layout from "../components/Layout";
-import { Blog as BlogProps } from "../types/blogPost";
+import { SanityDocument } from "@sanity/client";
 
-export default function Blog({ posts }: BlogProps) {
-  return (
-    <Layout>
-      {posts.map(({ frontmatter: { title, description, date }, slug }) => (
-        <article key={title}>
-          <header>
-            <h6>
-              <Link href={"/post/[slug]"} as={`/post/${slug}`}>
-                <a>{title}</a>
-              </Link>
-            </h6>
-            <span className="mb-4 text-sm">{date}</span>
-          </header>
-          <section>
-            <p className="mb-8">{description}</p>
-          </section>
-        </article>
-      ))}
-    </Layout>
-  );
+import { client } from "../utils/sanity";
+
+interface Blog {
+  posts: SanityDocument[];
 }
 
 export async function getStaticProps() {
-  const files = fs.readdirSync(`${process.cwd()}/content/posts`);
-
-  const posts = files.map((filename) => {
-    const markdownWithMetadata = fs
-      .readFileSync(`content/posts/${filename}`)
-      .toString();
-
-    const { data } = matter(markdownWithMetadata);
-
-    // Convert post date to format: Month day, Year
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    const formattedDate = new Date(data.updatedAt).toLocaleDateString(
-      "en-US"
-      // options
-    );
-
-    const frontmatter = {
-      ...data,
-      date: formattedDate,
-    };
-
-    return {
-      slug: filename.replace(".md", ""),
-      frontmatter,
-    };
-  });
+  const posts = await client
+    .fetch(
+      `*[_type == "post"]{
+        title,
+        slug,
+        excerpt,
+        _createdAt,
+        _id,
+        mainImage{
+          asset->{
+          _id,
+          url
+        }
+      }
+    }`
+    )
+    .catch(console.error);
 
   return {
     props: {
       posts,
     },
   };
+}
+
+export default function Blog({ posts }: Blog) {
+  return (
+    <Layout>
+      {posts.map((post) => (
+        <article key={post._id}>
+          <header>
+            <h6>
+              <Link href={"/post/[slug]"} as={`/post/${post.slug.current}`}>
+                <a>{post.title}</a>
+              </Link>
+            </h6>
+            <span className="mb-4 text-sm">{post._createdAt}</span>
+          </header>
+          <section>
+            <p className="mb-8">{post.excerpt}</p>
+          </section>
+        </article>
+      ))}
+    </Layout>
+  );
 }

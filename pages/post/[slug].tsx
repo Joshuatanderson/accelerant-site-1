@@ -6,11 +6,18 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
 
-import { FrontMatter, Post as PostProps } from "../../types/blogPost";
+// import { FrontMatter, Post as PostProps } from "../../types/blogPost";
 import Layout from "../../components/Layout";
 import Image from "next/image";
+import { client } from "../../utils/sanity";
+import { SanityDocument } from "@sanity/client";
+import { SignLanguageTwoTone } from "@mui/icons-material";
 
-interface GetStaticProps {
+interface PostProps {
+  post: SanityDocument;
+}
+
+interface Context {
   params: {
     slug: string;
   };
@@ -33,57 +40,68 @@ const mdImage = (img: any) =>
     <Image {...img} width={1} height={1} layout="responsive" />
   );
 
-export default function Post({ content, frontmatter }: PostProps) {
+export default function Post({ post }: PostProps) {
   return (
     <Layout>
       <article>
-        <ReactMarkdown
+        {/* <ReactMarkdown
           components={{ img: mdImage }}
           remarkPlugins={[remarkGfm, remarkUnwrapImages]}
-        >
-          {content}
-        </ReactMarkdown>
+        > */}
+        {/* <h2>{post.title}</h2>
+        {post.body} */}
+        {/* </ReactMarkdown> */}
       </article>
     </Layout>
   );
 }
 
-export async function getStaticPaths() {
-  const files = fs.readdirSync("content/posts");
-
-  const paths = files.map((filename) => ({
-    params: {
-      slug: filename.replace(".md", ""),
-    },
-  }));
-
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
-export async function getStaticProps({ params: { slug } }: GetStaticProps) {
-  const markdownWithMetadata = fs
-    .readFileSync(path.join("content/posts", slug + ".md"))
-    .toString();
-
-  const { data, content } = matter(markdownWithMetadata);
-
-  const formattedDate = new Date(data.updatedAt).toDateString();
-
-  const frontmatter = {
-    ...data,
-    date: formattedDate,
-  };
+export async function getStaticProps(context: Context) {
+  const post = await client
+    .fetch(
+      `*[_type == "post" && "${context.params.slug}" == slug.current]{
+        body,
+        title,
+        author,
+        slug,
+        date,
+        mainImage{asset->{_id,url}}}`
+    )
+    .catch((err) => console.error(err));
+  console.log(post);
 
   return {
     props: {
-      content: `# ${data.title}\n${byline(
-        data.author,
-        formattedDate
-      )}\n${content}`,
-      frontmatter,
+      post,
     },
+  };
+}
+
+interface slug {
+  current: string;
+}
+
+export async function getStaticPaths(slug: string) {
+  const posts = await client
+    .fetch(
+      `*[_type == "post"]{ 
+        slug 
+      }
+  `
+    )
+    .catch((err) => console.error(err));
+  const postSlugs = posts.map((post: SanityDocument) => post.slug);
+  // const paths = await client.fetch(
+  //   `*[_type == "post" && slugFieldName.current == ${slug}]`
+  // );
+
+  return {
+    paths: postSlugs.map((slug: slug) => ({
+      params: {
+        sanitySlug: slug.current,
+        slug: `/post/${slug.current}`,
+      },
+    })),
+    fallback: true,
   };
 }
