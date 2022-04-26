@@ -5,13 +5,13 @@ import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
+import ReactPortableText from "react-portable-text";
 
 // import { FrontMatter, Post as PostProps } from "../../types/blogPost";
 import Layout from "../../components/Layout";
 import Image from "next/image";
 import { client } from "../../utils/sanity";
 import { SanityDocument } from "@sanity/client";
-import { SignLanguageTwoTone } from "@mui/icons-material";
 
 interface PostProps {
   post: SanityDocument;
@@ -43,15 +43,9 @@ const mdImage = (img: any) =>
 export default function Post({ post }: PostProps) {
   return (
     <Layout>
-      <article>
-        {/* <ReactMarkdown
-          components={{ img: mdImage }}
-          remarkPlugins={[remarkGfm, remarkUnwrapImages]}
-        > */}
-        {/* <h2>{post.title}</h2>
-        {post.body} */}
-        {/* </ReactMarkdown> */}
-      </article>
+      {post && (
+        <article>{post && <ReactPortableText content={post.body} />}</article>
+      )}
     </Layout>
   );
 }
@@ -68,11 +62,10 @@ export async function getStaticProps(context: Context) {
         mainImage{asset->{_id,url}}}`
     )
     .catch((err) => console.error(err));
-  console.log(post);
 
   return {
     props: {
-      post,
+      post: post[0],
     },
   };
 }
