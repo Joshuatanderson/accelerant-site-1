@@ -10,8 +10,10 @@ import ReactPortableText from "react-portable-text";
 // import { FrontMatter, Post as PostProps } from "../../types/blogPost";
 import Layout from "../../components/Layout";
 import Image from "next/image";
+import { useNextSanityImage } from "next-sanity-image";
 import { client } from "../../utils/sanity";
 import { SanityDocument } from "@sanity/client";
+import { urlFor } from "../../utils/urlFor";
 
 interface PostProps {
   post: SanityDocument;
@@ -41,17 +43,21 @@ const mdImage = (img: any) =>
   );
 
 export default function Post({ post }: PostProps) {
+  const imageProps = useNextSanityImage(client, post.mainImage);
   return (
     <Layout>
       {post && (
-        <article>{post && <ReactPortableText content={post.body} />}</article>
+        <>
+          <article>{post && <ReactPortableText content={post.body} />}</article>
+          <Image {...imageProps} width={1} height={1} layout="responsive" />
+        </>
       )}
     </Layout>
   );
 }
 
 export async function getStaticProps(context: Context) {
-  const post = await client
+  const posts = await client
     .fetch(
       `*[_type == "post" && "${context.params.slug}" == slug.current]{
         body,
@@ -63,9 +69,11 @@ export async function getStaticProps(context: Context) {
     )
     .catch((err) => console.error(err));
 
+  console.log(posts[0].mainImage);
+
   return {
     props: {
-      post: post[0],
+      post: posts[0],
     },
   };
 }

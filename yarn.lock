@@ -1015,6 +1015,24 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.0.8.tgz#be3e914e84eacf16dbebd311c0d0b44aa1174c64"
   integrity sha512-ZK5v4bJwgXldAUA8r3q9YKfCwOqoHTK/ZqRjSeRXQrBXWouoPnS4MQtgC4AXGiiBuUu5wxrRgTlv0ktmM4P1Aw==
 
+"@sanity/block-content-to-hyperscript@^2.0.10":
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/@sanity/block-content-to-hyperscript/-/block-content-to-hyperscript-2.0.10.tgz#9cf805c5d2341d043bcab8b3740c9b3466b5ae6b"
+  integrity sha512-xT3iEmZkK0fvO5PDFpn9GMWGfvOopvbrRCBU48XxpFoTxRrfsHhxbRy8J0eND1HGXHUENkIKv5jbohtGd1MiVg==
+  dependencies:
+    "@sanity/generate-help-url" "^0.140.0"
+    "@sanity/image-url" "^0.140.15"
+    hyperscript "^2.0.2"
+    object-assign "^4.1.1"
+
+"@sanity/block-content-to-react@^2.0.0":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@sanity/block-content-to-react/-/block-content-to-react-2.0.7.tgz#6e257b5ab59ebe406005032eea586391d963eb93"
+  integrity sha512-oSriTf/3Ihnxp6AjEGiVjNPA2Iq/IFaWg4Frn5msGq5GT8N1kwLwxduig1OSn87UA15LNwiai9LAJwBR2k9lIg==
+  dependencies:
+    "@sanity/block-content-to-hyperscript" "^2.0.10"
+    prop-types "^15.6.2"
+
 "@sanity/client@^3.3.0":
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/@sanity/client/-/client-3.3.0.tgz#0b01b1ee25f9d12e0fd9d119fe752f0aeb18843a"
@@ -1035,10 +1053,20 @@
     event-source-polyfill "1.0.25"
     eventsource "^1.0.6"
 
+"@sanity/generate-help-url@^0.140.0":
+  version "0.140.0"
+  resolved "https://registry.yarnpkg.com/@sanity/generate-help-url/-/generate-help-url-0.140.0.tgz#f60ab75be5fdc346b9f0d1c2a0858aa3c2870109"
+  integrity sha512-H/G/WA9S22TXcXST52CIiTsHx3S2hH0gvK7LnI5w76vfKS0obnDPh8jrPg4xeNRYGPuV9MHYRlyERGpRGoo4Qw==
+
 "@sanity/generate-help-url@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@sanity/generate-help-url/-/generate-help-url-3.0.0.tgz#60e9cba61b82103ea3761730a53cd9310b98892d"
   integrity sha512-wtMYcV5GIDIhVyF/jjmdwq1GdlK07dRL40XMns73VbrFI7FteRltxv48bhYVZPcLkRXb0SHjpDS/icj9/yzbVA==
+
+"@sanity/image-url@^0.140.15", "@sanity/image-url@^0.140.22":
+  version "0.140.22"
+  resolved "https://registry.yarnpkg.com/@sanity/image-url/-/image-url-0.140.22.tgz#7a65f56bb751f7b1c5dfacfadd34ee10fc4f0fde"
+  integrity sha512-CAmQZnj+KM7FSEYiWlIGDit072syicYuAw0w7R2ctMzHiZ4p9mE/g6dBnYqrqFUrw2J+GpJgPt+RVspKP8vdqA==
 
 "@sanity/timed-out@^4.0.2":
   version "4.0.2"
@@ -1436,6 +1464,11 @@ braces@^3.0.2, braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
+browser-split@0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/browser-split/-/browser-split-0.0.0.tgz#41419caef769755929dd518967d3eec0a6262771"
+  integrity sha1-QUGcrvdpdVkp3VGJZ9PuwKYmJ3E=
+
 browserslist@^4.20.2:
   version "4.20.2"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.20.2.tgz#567b41508757ecd904dab4d1c646c612cd3d4f88"
@@ -1526,6 +1559,13 @@ character-entities@^2.0.0:
     readdirp "~3.6.0"
   optionalDependencies:
     fsevents "~2.3.2"
+
+class-list@~0.1.0, class-list@~0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/class-list/-/class-list-0.1.1.tgz#9b9745192c4179b5da0a0d7633658e3c70d796cb"
+  integrity sha1-m5dFGSxBebXaCg12M2WOPHDXlss=
+  dependencies:
+    indexof "0.0.1"
 
 cliui@^7.0.2:
   version "7.0.4"
@@ -2484,10 +2524,26 @@ hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.3.0, hoist-non-react-
   dependencies:
     react-is "^16.7.0"
 
+html-element@^2.0.0:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/html-element/-/html-element-2.3.1.tgz#5feb23dd5226467ef8c2faec51a5bf29c4ef5440"
+  integrity sha512-xnFt2ZkbFcjc+JoAtg3Hl89VeEZDjododu4VCPkRvFmBTHHA9U1Nt6hLUWfW2O+6Sl/rT1hHK/PivleX3PdBJQ==
+  dependencies:
+    class-list "~0.1.1"
+
 http-parser-js@>=0.5.1:
   version "0.5.6"
   resolved "https://registry.yarnpkg.com/http-parser-js/-/http-parser-js-0.5.6.tgz#2e02406ab2df8af8a7abfba62e0da01c62b95afd"
   integrity sha512-vDlkRPDJn93swjcjqMSaGSPABbIarsr1TLAui/gLDXzV5VsJNdXNzMYDyNBLQkjWQCJ1uizu8T2oDMhmGt0PRA==
+
+hyperscript@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/hyperscript/-/hyperscript-2.0.2.tgz#3839cba45554bdfe27bb81c2142d1684f8135af5"
+  integrity sha1-ODnLpFVUvf4nu4HCFC0WhPgTWvU=
+  dependencies:
+    browser-split "0.0.0"
+    class-list "~0.1.0"
+    html-element "^2.0.0"
 
 ignore@^5.1.9, ignore@^5.2.0:
   version "5.2.0"
@@ -2516,6 +2572,11 @@ imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
   integrity sha1-khi5srkoojixPcT7a21XbyMUU+o=
+
+indexof@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/indexof/-/indexof-0.0.1.tgz#82dc336d232b9062179d05ab3293a66059fd435d"
+  integrity sha1-gtwzbSMrkGIXnQWrMpOmYFn9Q10=
 
 inflight@^1.0.4:
   version "1.0.6"
@@ -3380,6 +3441,13 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
+next-sanity-image@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/next-sanity-image/-/next-sanity-image-3.2.1.tgz#81b44969c7b5c281b7f29fe25b3649828fc5a5ea"
+  integrity sha512-lnynR/h7kD5ueVxQoam8ElKXb+bGWuU1cP+PCwx1NzIiBUHM2wBMnvmpt+emubGocMaIURT/iwPU46VnmB9rsQ==
+  dependencies:
+    "@sanity/image-url" "^0.140.22"
+
 next@12.1.3:
   version "12.1.3"
   resolved "https://registry.yarnpkg.com/next/-/next-12.1.3.tgz#0eb138e2b672aeadc12de3b073510502c5e37d06"
@@ -3834,6 +3902,13 @@ react-markdown@^8.0.2:
     unified "^10.0.0"
     unist-util-visit "^4.0.0"
     vfile "^5.0.0"
+
+react-portable-text@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/react-portable-text/-/react-portable-text-0.4.3.tgz#d2794a5db9c0bb18e72949fec1c91781fda35508"
+  integrity sha512-r//xYac1Bf5GMk3eKZiDpoRtt0N/W6kEAkI+zw148JGAdr2IW9MvhT/giOYop0KCuiyECry1yonhomFFbHeMAw==
+  dependencies:
+    "@sanity/block-content-to-react" "^2.0.0"
 
 react-transition-group@^4.4.2:
   version "4.4.2"
