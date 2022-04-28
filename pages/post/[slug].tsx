@@ -14,6 +14,7 @@ import { useNextSanityImage } from "next-sanity-image";
 import { client } from "../../utils/sanity";
 import { SanityDocument } from "@sanity/client";
 import { urlFor } from "../../utils/urlFor";
+import { Skeleton } from "@mui/material";
 
 interface PostProps {
   post: SanityDocument;
@@ -43,12 +44,24 @@ const mdImage = (img: any) =>
   );
 
 export default function Post({ post }: PostProps) {
-  const imageProps = useNextSanityImage(client, post.mainImage);
+  const imageProps = useNextSanityImage(client, post?.mainImage);
   return (
     <Layout>
+      {!post && (
+        <>
+          <Skeleton variant="text" height={50} animation="wave" />
+          <Skeleton variant="text" animation="wave" />
+          <Skeleton variant="text" animation="wave" />
+          <Skeleton variant="text" animation="wave" />
+          <Skeleton variant="rectangular" height={300} animation="wave" />
+        </>
+      )}
+
       {post && (
         <>
-          <article>{post && <ReactPortableText content={post.body} />}</article>
+          <article>
+            {post && <ReactPortableText content={post?.body} />}
+          </article>
           <Image {...imageProps} width={1} height={1} layout="responsive" />
         </>
       )}
@@ -69,7 +82,7 @@ export async function getStaticProps(context: Context) {
     )
     .catch((err) => console.error(err));
 
-  console.log(posts[0].mainImage);
+  console.log(posts[0]?.mainImage);
 
   return {
     props: {
