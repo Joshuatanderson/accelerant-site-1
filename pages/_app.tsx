@@ -4,6 +4,7 @@ import "../styles/tailwind.scss";
 import { Box, CssBaseline } from "@mui/material";
 import "typeface-quattrocento-sans";
 import "typeface-work-sans";
+import { SessionProvider } from "next-auth/react";
 
 import Header from "../components/Header";
 
@@ -13,13 +14,15 @@ const classes = {
   },
 };
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <CssBaseline>
-      <Box sx={classes.container}>
-        <Header />
-        <Component {...pageProps} />
-      </Box>
+      <SessionProvider session={session}>
+        <Box sx={classes.container}>
+          <Header />
+          <Component {...pageProps} />
+        </Box>
+      </SessionProvider>
     </CssBaseline>
   );
 }
