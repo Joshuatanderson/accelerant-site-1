@@ -7,7 +7,10 @@ const nextConfig = {
   },
   plugins: {
 
-  }
+  },
+  images: {
+		domains: ['cdn.sanity.io', "localhost"],
+	}
 }
 
 module.exports = nextConfig
