@@ -14,6 +14,7 @@ const login = () => {
   const onSubmit = async (e) => {
     setError(null);
     try {
+      e.preventDefault();
       const resp = await signInWithEmailAndPassword(email, password);
       console.log(resp);
       console.log("user logged in via firebase");

@@ -18,6 +18,7 @@ const SignUp = () => {
 
     if (passwordOne === passwordTwo) {
       try {
+        e.preventDefault();
         const authUser = await createUserWithEmailAndPassword(
           email,
           passwordOne
