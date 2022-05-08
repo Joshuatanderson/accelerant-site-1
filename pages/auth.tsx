@@ -1,22 +1,24 @@
-import React from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useAuth } from "../contexts/AuthUser";
 
-const auth = () => {
-  const { data: session } = useSession();
-  if (session) {
-    return (
-      <>
-        Signed in as {session?.user?.email} <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
-    );
-  }
+const Auth = () => {
+  const { authUser, loading } = useAuth();
+  const router = useRouter();
+
+  // Listen for changes on loading and authUser, redirect if needed
+  useEffect(() => {
+    if (!loading && !authUser) router.push("/");
+  }, [authUser, loading]);
+
   return (
-    <>
-      Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
-    </>
+    <div className="row col">
+      <div className="center">
+        <h1>Logged in as:</h1>
+        <p>{authUser?.email}</p>
+      </div>
+    </div>
   );
 };
 
-export default auth;
+export default Auth;

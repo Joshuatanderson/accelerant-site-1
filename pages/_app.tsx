@@ -4,9 +4,10 @@ import "../styles/tailwind.scss";
 import { Box, CssBaseline } from "@mui/material";
 import "typeface-quattrocento-sans";
 import "typeface-work-sans";
-import { SessionProvider } from "next-auth/react";
+// import { SessionProvider } from "next-auth/react";
 
 import Header from "../components/Header";
+import { AuthUserProvider } from "../contexts/AuthUser";
 
 const classes = {
   container: {
@@ -17,12 +18,12 @@ const classes = {
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <CssBaseline>
-      <SessionProvider session={session}>
+      <AuthUserProvider>
         <Box sx={classes.container}>
           <Header />
           <Component {...pageProps} />
         </Box>
-      </SessionProvider>
+      </AuthUserProvider>
     </CssBaseline>
   );
 }
