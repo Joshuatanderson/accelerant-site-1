@@ -24,7 +24,7 @@ const SignUp = () => {
         );
         console.log("user successfully made in firebase");
         console.info(authUser);
-        router.push("/logged_in");
+        router.push("/content"); // user is logged in
       } catch (error) {
         setError(error?.message);
       }
@@ -34,69 +34,98 @@ const SignUp = () => {
     }
   };
   return (
-    <div className="container signup">
-      <div className="min-h-screen flex mb-4 row-signup">
-        <div className="w-2/5  h-12 row-left">
-          <div className="text-singup mb-8">
-            <h2 className="">Join us for free</h2>
-          </div>
-          <div className="form-signup-dig">
-            <div className="w-full max-w-xs">
-              <form className="max-w-md mb-4 form-input" onSubmit={onSubmit}>
-                <div className="mb-4">
-                  <label
-                    className="block text-grey-darker text-sm font-bold mb-2"
-                    htmlFor="password"
-                  >
-                    Email
-                  </label>
-                  <input
-                    className="shadow appearance-none border border rounded h-12 w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    id="password"
-                    onChange={(e) => setEmail(e.target.value)}
-                    type="email"
-                    placeholder="email"
-                  />
-                  {error && <p className="text-red-500">{error}</p>}
-                </div>
-                <div className="mb-6">
-                  <label
-                    className="block text-grey-darker text-sm font-bold mb-2"
-                    htmlFor="signUpPassword"
-                  ></label>
-                  <input
-                    className="shadow appearance-none border border rounded w-full h-12 py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    id="signUpPassword"
-                    onChange={(e) => setPasswordOne(e.target.value)}
-                    type="password"
-                    placeholder="Password"
-                  />
-                </div>
-                <div className="mb-6">
-                  <label
-                    className="block text-grey-darker text-sm font-bold mb-2"
-                    htmlFor="confirmPassword"
-                  ></label>
-                  <input
-                    className="shadow appearance-none border border rounded w-full h-12 py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    id="confirmPassword"
-                    onChange={(e) => setPasswordTwo(e.target.value)}
-                    type="password"
-                    placeholder="Confirm password"
-                  />
-                </div>
-                <div className="flex items-center justify-between">
-                  <button
-                    className="bg-black hover:bg-blue-dark text-white font-bold w-full h-12 py-2 px-4  rounded focus:outline-none focus:shadow-outline"
-                    type="button"
-                    onClick={onSubmit}
-                  >
-                    Sign Up
-                  </button>
-                </div>
-              </form>
+    <div className="h-screen flex">
+      <div className="flex w-full lg:w-1/2 justify-center items-center bg-white space-y-8">
+        <div className="w-full px-8 md:px-32 lg:px-24">
+          <form
+            onClick={onSubmit}
+            className="bg-white rounded-md shadow-2xl p-5"
+          >
+            <h1 className="text-gray-800 font-bold text-2xl mb-1">Sign Up</h1>
+            <div className="flex items-center border-2 mb-8 py-2 px-3 rounded-2xl">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                />
+              </svg>
+              <input
+                id="email"
+                className=" pl-2 w-full outline-none border-none"
+                type="email"
+                placeholder="email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
-          </div>
+            <div className="flex items-center border-2 mb-12 py-2 px-3 rounded-2xl ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-gray-400"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <input
+                className="pl-2 w-full outline-none border-none"
+                type="password"
+                id="password"
+                placeholder="password"
+                onChange={(e) => setPasswordOne(e.target.value)}
+              />
+            </div>
+            <div className="flex items-center border-2 mb-12 py-2 px-3 rounded-2xl ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-gray-400"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <input
+                className="pl-2 w-full outline-none border-none"
+                type="password"
+                id="passwordTwo"
+                placeholder="confirm password"
+                onChange={(e) => setPasswordTwo(e.target.value)}
+              />
+            </div>
+            <button
+              type="submit"
+              className="block w-full bg-indigo-600 mt-5 py-2 rounded-2xl hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2"
+            >
+              Sign Up
+            </button>
+            <div className="flex justify-between mt-4">
+              <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">
+                Forgot Password ?
+              </span>
+
+              <a
+                href="/login"
+                className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all"
+              >
+                Already have an account?
+              </a>
+            </div>
+          </form>
         </div>
       </div>
     </div>

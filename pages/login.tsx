@@ -12,7 +12,6 @@ const login = () => {
   const { signInWithEmailAndPassword } = useAuth();
 
   const onSubmit = async (e) => {
-    e.preventDefault();
     setError(null);
     try {
       const resp = await signInWithEmailAndPassword(email, password);
@@ -21,6 +20,7 @@ const login = () => {
       router.push("/content"); // user is logged in
     } catch (error) {
       setError(error?.message);
+      e.preventDefault();
     }
   };
 
@@ -32,12 +32,7 @@ const login = () => {
             onClick={onSubmit}
             className="bg-white rounded-md shadow-2xl p-5"
           >
-            <h1 className="text-gray-800 font-bold text-2xl mb-1">
-              Hello Again!
-            </h1>
-            <p className="text-sm font-normal text-gray-600 mb-8">
-              Welcome Back
-            </p>
+            <h1 className="text-gray-800 font-bold text-2xl mb-1">Log In</h1>
             <div className="flex items-center border-2 mb-8 py-2 px-3 rounded-2xl">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +89,7 @@ const login = () => {
               </span>
 
               <a
-                href="#"
+                href="/signup"
                 className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all"
               >
                 Don't have an account yet?
