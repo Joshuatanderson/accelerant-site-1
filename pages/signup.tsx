@@ -36,16 +36,6 @@ const SignUp = () => {
   return (
     <div className="container signup">
       <div className="min-h-screen flex mb-4 row-signup">
-        {/* <div className="w-3/5 h-12 row-right"> */}
-        {/* <div className="text-dig"> */}
-        {/* <p className="w-full text-base sm:text-lg md:text-xl text-center lg:text-2xl xl:text-5xl">
-              Join the millions african developers to meet with
-            </p>
-            <div className="text-center mb-4 w-3/5">
-              <img src="https://cdn.dribbble.com/users/79571/screenshots/5516891/workflow_4x.png" />
-            </div> */}
-        {/* </div> */}
-        {/* </div> */}
         <div className="w-2/5  h-12 row-left">
           <div className="text-singup mb-8">
             <h2 className="">Join us for free</h2>
@@ -53,24 +43,10 @@ const SignUp = () => {
           <div className="form-signup-dig">
             <div className="w-full max-w-xs">
               <form className="max-w-md mb-4 form-input" onSubmit={onSubmit}>
-                {/* <div className="mb-4">
-                  <label
-                    className="block text-grey-darker text-sm font-bold mb-2"
-                    for="username"
-                  >
-                    Username
-                  </label>
-                  <input
-                    className="shadow appearance-none border rounded w-full h-12 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
-                    id="username"
-                    type="text"
-                    placeholder="Username"
-                  />
-                </div> */}
                 <div className="mb-4">
                   <label
                     className="block text-grey-darker text-sm font-bold mb-2"
-                    for="password"
+                    htmlFor="password"
                   >
                     Email
                   </label>
@@ -86,7 +62,7 @@ const SignUp = () => {
                 <div className="mb-6">
                   <label
                     className="block text-grey-darker text-sm font-bold mb-2"
-                    for="signUpPassword"
+                    htmlFor="signUpPassword"
                   ></label>
                   <input
                     className="shadow appearance-none border border rounded w-full h-12 py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
@@ -99,7 +75,7 @@ const SignUp = () => {
                 <div className="mb-6">
                   <label
                     className="block text-grey-darker text-sm font-bold mb-2"
-                    for="confirmPassword"
+                    htmlFor="confirmPassword"
                   ></label>
                   <input
                     className="shadow appearance-none border border rounded w-full h-12 py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
