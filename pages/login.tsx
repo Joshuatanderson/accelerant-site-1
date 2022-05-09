@@ -12,7 +12,7 @@ const login = () => {
 
   const { signInWithEmailAndPassword } = useAuth();
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: Event) => {
     e.preventDefault();
     setError(null);
     try {

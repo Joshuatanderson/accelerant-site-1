@@ -14,7 +14,7 @@ const SignUp = () => {
 
   const { createUserWithEmailAndPassword } = useAuth();
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: Event) => {
     setError(null);
     e.preventDefault();
 

@@ -12,7 +12,7 @@ const ForgotPassword = () => {
 
   const { sendPasswordResetEmail } = useAuth();
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: Event) => {
     setError(null);
     try {
       e.preventDefault();
