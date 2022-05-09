@@ -14,11 +14,13 @@ const AuthUserContext = createContext<{
     password: string
   ) => Promise<void>;
   signOut: () => {};
+  sendPasswordResetEmail: (email: string) => Promise<void>;
 }>({
   authUser: null,
   loading: true,
   signInWithEmailAndPassword: async () => {},
   createUserWithEmailAndPassword: async () => {},
+  sendPasswordResetEmail: async () => {},
   signOut: async () => {},
 });
 

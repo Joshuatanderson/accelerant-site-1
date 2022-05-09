@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 
 import { useAuth } from "../contexts/AuthUser";
+import Link from "next/link";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -15,10 +16,10 @@ const SignUp = () => {
 
   const onSubmit = async (e) => {
     setError(null);
+    e.preventDefault();
 
     if (passwordOne === passwordTwo) {
       try {
-        e.preventDefault();
         const authUser = await createUserWithEmailAndPassword(
           email,
           passwordOne
@@ -39,7 +40,7 @@ const SignUp = () => {
       <div className="flex w-full lg:w-1/2 justify-center items-center bg-white space-y-8">
         <div className="w-full px-8 md:px-32 lg:px-24">
           <form
-            onClick={onSubmit}
+            onSubmit={onSubmit}
             className="bg-white rounded-md shadow-2xl p-5"
           >
             <h1 className="text-gray-800 font-bold text-2xl mb-1">Sign Up</h1>
@@ -108,6 +109,10 @@ const SignUp = () => {
                 onChange={(e) => setPasswordTwo(e.target.value)}
               />
             </div>
+            <div className="pl-2 w-full outline-none border-none">
+              {error && <p className="text-red-500 text-xs">{error}</p>}
+            </div>
+
             <button
               type="submit"
               className="block w-full bg-indigo-600 mt-5 py-2 rounded-2xl hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2"
@@ -115,16 +120,17 @@ const SignUp = () => {
               Sign Up
             </button>
             <div className="flex justify-between mt-4">
-              <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">
-                Forgot Password ?
-              </span>
+              <Link href="/forgot-password">
+                <a className="text-sm ml-2 cursor-pointer hover:-translate-y-1 duration-500 transition-all">
+                  Forgot Password ?
+                </a>
+              </Link>
 
-              <a
-                href="/login"
-                className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all"
-              >
-                Already have an account?
-              </a>
+              <Link href="/login">
+                <a className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">
+                  Already have an account?
+                </a>
+              </Link>
             </div>
           </form>
         </div>

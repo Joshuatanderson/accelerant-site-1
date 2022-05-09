@@ -32,6 +32,10 @@ export default function useFirebaseAuth(){
         await firebase.auth().signInWithEmailAndPassword(email, password);
     }
 
+    const sendPasswordResetEmail = async (email: string) => {
+        await firebase.auth().sendPasswordResetEmail(email);
+    }
+
     const signOut = async () => {
         await firebase.auth().signOut();
         await clear();
@@ -57,5 +61,6 @@ export default function useFirebaseAuth(){
         signInWithEmailAndPassword,
         createUserWithEmailAndPassword,
         signOut,
+        sendPasswordResetEmail,
     }
 }
