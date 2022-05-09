@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { useRouter } from "next/router";
 
 import { useAuth } from "../contexts/AuthUser";
@@ -14,7 +14,7 @@ const SignUp = () => {
 
   const { createUserWithEmailAndPassword } = useAuth();
 
-  const onSubmit = async (e: Event) => {
+  const onSubmit = async (e: FormEvent) => {
     setError(null);
     e.preventDefault();
 
@@ -27,7 +27,7 @@ const SignUp = () => {
         console.log("user successfully made in firebase");
         console.info(authUser);
         router.push("/content"); // user is logged in
-      } catch (error) {
+      } catch (error: any) {
         setError(error?.message);
       }
     } else {
@@ -122,7 +122,7 @@ const SignUp = () => {
             <div className="flex justify-between mt-4">
               <Link href="/forgot-password">
                 <a className="text-sm ml-2 cursor-pointer hover:-translate-y-1 duration-500 transition-all">
-                  Forgot Password ?
+                  Forgot Password?
                 </a>
               </Link>
 

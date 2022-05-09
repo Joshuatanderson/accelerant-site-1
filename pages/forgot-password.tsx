@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { useAuth } from "../contexts/AuthUser";
 
 const ForgotPassword = () => {
@@ -12,13 +12,13 @@ const ForgotPassword = () => {
 
   const { sendPasswordResetEmail } = useAuth();
 
-  const onSubmit = async (e: Event) => {
+  const onSubmit = async (e: FormEvent) => {
     setError(null);
     try {
       e.preventDefault();
       const resp = await sendPasswordResetEmail(email);
       setSuccess(true);
-    } catch (error) {
+    } catch (error: any) {
       setError(error?.message);
       e.preventDefault();
     }
@@ -77,7 +77,7 @@ const ForgotPassword = () => {
             <div className="flex justify-between mt-4">
               <Link href="/signup">
                 <a className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">
-                  Don't have an account yet?
+                  Don&apos;t have an account yet?
                 </a>
               </Link>
             </div>

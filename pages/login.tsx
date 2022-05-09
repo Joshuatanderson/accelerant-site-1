@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { useAuth } from "../contexts/AuthUser";
 
-const login = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,7 +12,7 @@ const login = () => {
 
   const { signInWithEmailAndPassword } = useAuth();
 
-  const onSubmit = async (e: Event) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
     try {
@@ -20,7 +20,7 @@ const login = () => {
       console.log(resp);
       console.log("user logged in via firebase");
       router.push("/content"); // user is logged in
-    } catch (error) {
+    } catch (error: any) {
       setError(error?.message);
       e.preventDefault();
     }
@@ -91,13 +91,13 @@ const login = () => {
             <div className="flex justify-between mt-4">
               <Link href="/forgot-password">
                 <a className="text-sm ml-2 cursor-pointer hover:-translate-y-1 duration-500 transition-all">
-                  Forgot Password ?
+                  Forgot Password?
                 </a>
               </Link>
 
               <Link href="/signup">
                 <a className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all">
-                  Don't have an account yet?
+                  Don&apos;t have an account yet?
                 </a>
               </Link>
             </div>
@@ -108,4 +108,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
