@@ -5,7 +5,7 @@ import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
-import ReactPortableText from "react-portable-text";
+import { PortableText } from "@portabletext/react";
 
 // import { FrontMatter, Post as PostProps } from "../../types/blogPost";
 import Layout from "../../components/Layout";
@@ -60,7 +60,12 @@ export default function Post({ post }: PostProps) {
       {post && (
         <>
           <article>
-            {post && <ReactPortableText content={post?.body} />}
+            {post && (
+              <PortableText
+                value={post?.body}
+                components={components}
+              />
+            )}
           </article>
           <Image {...imageProps} width={1} height={1} layout="responsive" />
         </>
