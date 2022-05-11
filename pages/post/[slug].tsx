@@ -1,21 +1,17 @@
 import React from "react";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import remarkUnwrapImages from "remark-unwrap-images";
 import { PortableText } from "@portabletext/react";
 
-// import { FrontMatter, Post as PostProps } from "../../types/blogPost";
 import Layout from "../../components/Layout";
 import Image from "next/image";
 import { useNextSanityImage } from "next-sanity-image";
 import { client } from "../../utils/sanity";
+import dynamic from "next/dynamic";
 import { SanityDocument } from "@sanity/client";
-import { urlFor } from "../../utils/urlFor";
 import { Skeleton } from "@mui/material";
 
+const ReactHlsPlayer = dynamic(() => import("react-hls-player"), {
+  ssr: false,
+});
 interface PostProps {
   post: SanityDocument;
 }
@@ -26,25 +22,53 @@ interface Context {
   };
 }
 
-const byline = (author: string, date: string) =>
-  `${author}.  Last updated on ${date}.`;
+const components = {
+  types: {
+    videoBlogPost: (document: any) => {
+      const playerRef = React.useRef<HTMLVideoElement>(null);
 
-const mdImage = (img: any) =>
-  img.title ? (
-    <figure>
-      <Image {...img} width={1} height={1} layout="responsive" />
-      <div className="flex flex-col items-center justify-center">
-        <div className="text-center">
-          <figcaption>{img.title}</figcaption>
-        </div>
-      </div>
-    </figure>
-  ) : (
-    <Image {...img} width={1} height={1} layout="responsive" />
-  );
+      return (
+        <ReactHlsPlayer
+          playerRef={playerRef}
+          // TODO: replace with correct id fetching mechanism
+          src={`https://stream.mux.com/${document?.value?.video?.asset?.playbackId}.m3u8`}
+          autoPlay={false}
+          controls={true}
+          width="100%"
+          height="auto"
+        />
+      );
+    },
+    undefined: (document: any) => {
+      {
+        console.log("undefined type");
+        return <></>;
+      }
+    },
+  },
+};
+
+// const byline = (author: string, date: string) =>
+//   `${author}.  Last updated on ${date}.`;
+
+// const mdImage = (img: any) =>
+//   img.title ? (
+//     <figure>
+//       <Image {...img} width={1} height={1} layout="responsive" />
+//       <div className="flex flex-col items-center justify-center">
+//         b
+//         <div className="text-center">
+//           <figcaption>{img.title}</figcaption>
+//         </div>
+//       </div>
+//     </figure>
+//   ) : (
+//     <Image {...img} width={1} height={1} layout="responsive" />
+//   );
 
 export default function Post({ post }: PostProps) {
   const imageProps = useNextSanityImage(client, post?.mainImage);
+
   return (
     <Layout>
       {!post && (
@@ -66,14 +90,13 @@ export default function Post({ post }: PostProps) {
             <span>{new Date(post._createdAt).toLocaleDateString()}</span>
           </p>
           <article>
-            {post && (
-              <PortableText
-                value={post?.body}
-                components={components}
-              />
+            {post?.body && (
+              <PortableText value={post?.body} components={components} />
             )}
           </article>
-          <Image {...imageProps} width={1} height={1} layout="responsive" />
+          {imageProps && (
+            <Image {...imageProps} width={1} height={1} layout="responsive" />
+          )}
         </>
       )}
     </Layout>
@@ -84,16 +107,26 @@ export async function getStaticProps(context: Context) {
   const posts = await client
     .fetch(
       `*[_type == "post" && "${context.params.slug}" == slug.current]{
-        body,
+        _createdAt,
+        body[]{
+          _type == 'videoBlogPost' => {
+            video{asset->},
+            _type,
+            title,
+            ...
+          },
+          _type != 'videoBlogPost' => {
+            ...
+          },
+        },
         title,
         author->,
-        slug,
-        date,
-        mainImage{asset->{_id,url}}}`
+        mainImage{asset->{_id,url}},
+      }`
     )
     .catch((err) => console.error(err));
 
-  console.log(posts[0]?.mainImage);
+  console.log(posts[0]);
 
   return {
     props: {

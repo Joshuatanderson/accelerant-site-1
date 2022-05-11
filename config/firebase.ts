@@ -8,7 +8,6 @@ const FIREBASE_CREDENTIALS = {
 }
 
 if(!firebase.apps.length){
-    console.log(FIREBASE_CREDENTIALS)
     firebase.initializeApp(FIREBASE_CREDENTIALS)
 }
 
