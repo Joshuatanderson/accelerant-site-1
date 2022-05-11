@@ -104,16 +104,16 @@ export default function Post({ post }: PostProps) {
 }
 
 export async function getStaticProps(context: Context) {
+  // Fuck this shit.  Apparently, destructuring in GROQ works in the opposite direction from JS.  Ick.
   const posts = await client
     .fetch(
       `*[_type == "post" && "${context.params.slug}" == slug.current]{
         _createdAt,
         body[]{
           _type == 'videoBlogPost' => {
+            ...,
             video{asset->},
             _type,
-            title,
-            ...
           },
           _type != 'videoBlogPost' => {
             ...
@@ -125,8 +125,6 @@ export async function getStaticProps(context: Context) {
       }`
     )
     .catch((err) => console.error(err));
-
-  console.log(posts[0]);
 
   return {
     props: {
