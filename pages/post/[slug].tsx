@@ -59,6 +59,12 @@ export default function Post({ post }: PostProps) {
 
       {post && (
         <>
+          <h1>{post.title}</h1>
+          <p>
+            <span>{post?.author?.name}</span>
+            <br />
+            <span>{new Date(post._createdAt).toLocaleDateString()}</span>
+          </p>
           <article>
             {post && (
               <PortableText
@@ -80,7 +86,7 @@ export async function getStaticProps(context: Context) {
       `*[_type == "post" && "${context.params.slug}" == slug.current]{
         body,
         title,
-        author,
+        author->,
         slug,
         date,
         mainImage{asset->{_id,url}}}`
