@@ -5,13 +5,10 @@ import Layout from "../../components/Layout";
 import Image from "next/image";
 import { useNextSanityImage } from "next-sanity-image";
 import { client } from "../../utils/sanity";
-import dynamic from "next/dynamic";
 import { SanityDocument } from "@sanity/client";
 import { Skeleton } from "@mui/material";
+import VideoBlogPost from "../../components/VideoBlogPost";
 
-const ReactHlsPlayer = dynamic(() => import("react-hls-player"), {
-  ssr: false,
-});
 interface PostProps {
   post: SanityDocument;
 }
@@ -24,25 +21,11 @@ interface Context {
 
 const components = {
   types: {
-    videoBlogPost: (document: any) => {
-      const playerRef = React.useRef<HTMLVideoElement>(null);
-
-      return (
-        <ReactHlsPlayer
-          playerRef={playerRef}
-          // TODO: replace with correct id fetching mechanism
-          src={`https://stream.mux.com/${document?.value?.video?.asset?.playbackId}.m3u8`}
-          autoPlay={false}
-          controls={true}
-          width="100%"
-          height="auto"
-        />
-      );
-    },
+    videoBlogPost: (document: any) => <VideoBlogPost document={document} />,
     undefined: (document: any) => {
       {
         console.log("undefined type");
-        return <></>;
+        return null;
       }
     },
   },
