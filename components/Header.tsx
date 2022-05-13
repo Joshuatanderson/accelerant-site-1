@@ -18,9 +18,9 @@ const classes = {
   },
 };
 
-const Header = React.forwardRef((props, ref) => {
+const Header = () => {
   return (
-    <Box sx={classes.headerCont} ref={ref}>
+    <Box sx={classes.headerCont}>
       <Link href="/">
         <a style={classes.invisibleLink}>
           <Image
@@ -35,6 +35,6 @@ const Header = React.forwardRef((props, ref) => {
       <Menu />
     </Box>
   );
-});
+};
 
 export default Header;
