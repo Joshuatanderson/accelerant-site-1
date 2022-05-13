@@ -126,9 +126,18 @@ export async function getStaticProps(context: Context) {
     )
     .catch((err) => console.error(err));
 
+  const stringifiedPost = JSON.stringify(posts[0], (key, val) => {
+    if (val === undefined) {
+      return null;
+    }
+    return val;
+  });
+
+  console.log(posts[0]);
+
   return {
     props: {
-      post: posts[0],
+      post: stringifiedPost,
     },
   };
 }
