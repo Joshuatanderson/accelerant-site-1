@@ -109,6 +109,7 @@ export async function getStaticProps({ params }: Context) {
     )
     .catch((err) => console.error(err));
 
+  // this is done to prevent build errors on JSON serialization
   const stringifiedPost = JSON.stringify(posts[0], (key, val) => {
     if (val === undefined) {
       return null;
@@ -120,7 +121,7 @@ export async function getStaticProps({ params }: Context) {
 
   return {
     props: {
-      post: stringifiedPost,
+      post: JSON.parse(stringifiedPost),
     },
   };
 }
