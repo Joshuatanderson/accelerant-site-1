@@ -8,6 +8,7 @@ import { client } from "../../utils/sanity";
 import { SanityDocument } from "@sanity/client";
 import { Skeleton } from "@mui/material";
 import VideoBlogPost from "../../components/VideoBlogPost";
+import groq from "groq";
 
 interface PostProps {
   post: SanityDocument;
@@ -72,7 +73,7 @@ export async function getStaticProps({ params }: Context) {
   // Fuck this shit.  Apparently, destructuring in GROQ works in the opposite direction from JS.  Ick.
   const posts = await client
     .fetch(
-      `*[_type == "post" && "${params.slug}" == slug.current]{
+      groq`*[_type == "post" && "${params.slug}" == slug.current]{
         _createdAt,
         body[]{
           _type == 'videoBlogPost' => {
