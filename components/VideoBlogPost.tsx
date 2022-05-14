@@ -5,7 +5,7 @@ const ReactHlsPlayer = dynamic(() => import("react-hls-player"), {
   ssr: false,
 });
 
-const VideoBlogPost = (document: any) => {
+const VideoBlogPost = ({ document }: any) => {
   const playerRef = useRef<HTMLVideoElement>(null);
 
   return (

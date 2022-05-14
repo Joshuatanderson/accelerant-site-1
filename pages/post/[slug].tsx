@@ -117,8 +117,6 @@ export async function getStaticProps({ params }: Context) {
     return val;
   });
 
-  console.log(posts[0]);
-
   return {
     props: {
       post: JSON.parse(stringifiedPost),
