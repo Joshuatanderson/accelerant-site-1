@@ -31,24 +31,6 @@ const components = {
   },
 };
 
-// const byline = (author: string, date: string) =>
-//   `${author}.  Last updated on ${date}.`;
-
-// const mdImage = (img: any) =>
-//   img.title ? (
-//     <figure>
-//       <Image {...img} width={1} height={1} layout="responsive" />
-//       <div className="flex flex-col items-center justify-center">
-//         b
-//         <div className="text-center">
-//           <figcaption>{img.title}</figcaption>
-//         </div>
-//       </div>
-//     </figure>
-//   ) : (
-//     <Image {...img} width={1} height={1} layout="responsive" />
-//   );
-
 export default function Post({ post }: PostProps) {
   const imageProps = useNextSanityImage(client, post?.mainImage);
 
