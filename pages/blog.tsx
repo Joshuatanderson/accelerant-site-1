@@ -36,7 +36,7 @@ export async function getStaticProps() {
 export default function Blog({ posts }: Blog) {
   console.log(posts);
   return (
-    <Layout>
+    <Layout title="Blog" rootPath="/blog">
       {posts.map((post) => (
         <article key={post._id}>
           <header>
