@@ -36,7 +36,7 @@ export default function Post({ post }: PostProps) {
   const imageProps = useNextSanityImage(client, post?.mainImage);
 
   return (
-    <Layout>
+    <Layout title="Blog" rootPath="/blog">
       {!post && (
         <>
           <Skeleton variant="text" height={50} animation="wave" />
