@@ -73,7 +73,7 @@ export async function getStaticProps({ params }: Context) {
   // Fuck this shit.  Apparently, destructuring in GROQ works in the opposite direction from JS.  Ick.
   const posts = await client
     .fetch(
-      groq`*[_type == "post" && "${params.slug}" == slug.current]{
+      `*[_type == "post" && "${params.slug}" == slug.current]{
         _createdAt,
         body[]{
           _type == 'videoBlogPost' => {
@@ -91,6 +91,7 @@ export async function getStaticProps({ params }: Context) {
       }`
     )
     .catch((err) => console.error(err));
+  console.log(posts[0]);
 
   // this is done to prevent build errors on JSON serialization
   const stringifiedPost = JSON.stringify(posts[0], (key, val) => {

@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import { SanityDocument } from "@sanity/client";
 
 import { client } from "../utils/sanity";
+import groq from "groq";
 
 interface Blog {
   posts: SanityDocument[];
@@ -11,21 +12,19 @@ interface Blog {
 export async function getStaticProps() {
   const posts = await client
     .fetch(
-      `*[_type == "post"]{
+      groq`*[_type == "post" && isPublic == true]{
         title,
         slug,
         excerpt,
         _createdAt,
         _id,
-        mainImage{
-          asset->{
-          _id,
-          url
-        }
-      }
-    }`
+        isPublic,
+        categories[]->{code}
+      }`
     )
     .catch(console.error);
+
+  console.log(posts);
 
   return {
     props: {
@@ -35,6 +34,7 @@ export async function getStaticProps() {
 }
 
 export default function Blog({ posts }: Blog) {
+  console.log(posts);
   return (
     <Layout>
       {posts.map((post) => (
