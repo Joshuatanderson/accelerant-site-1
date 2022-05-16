@@ -4,6 +4,10 @@ import { SanityDocument } from "@sanity/client";
 
 import { client } from "../utils/sanity";
 import groq from "groq";
+import useFirebaseAuth from "../hooks/useFirebaseAuth";
+import { useEffect, useState } from "react";
+import { useAuth } from "../contexts/AuthUser";
+import { useRouter } from "next/router";
 
 interface Content {
   contents: SanityDocument[];
@@ -35,6 +39,16 @@ export async function getStaticProps() {
 }
 
 export default function Content({ contents }: Content) {
+  const { authUser } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (authUser) {
+    } else {
+      router.push("/login");
+    }
+  }, []);
+
   console.log(contents);
   return (
     <Layout title="Content" rootPath="/content">

@@ -15,7 +15,7 @@ const classes = {
   },
 };
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+function MyApp({ Component, pageProps: { ...pageProps } }: AppProps) {
   return (
     <CssBaseline>
       <AuthUserProvider>
