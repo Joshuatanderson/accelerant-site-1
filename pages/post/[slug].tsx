@@ -9,6 +9,7 @@ import { SanityDocument } from "@sanity/client";
 import { Skeleton } from "@mui/material";
 import VideoBlogPost from "../../components/VideoBlogPost";
 import groq from "groq";
+import { Code } from "../../components/Code";
 
 interface PostProps {
   post: SanityDocument;
@@ -23,6 +24,7 @@ interface Context {
 const components = {
   types: {
     videoBlogPost: (document: any) => <VideoBlogPost document={document} />,
+    code: (document: any) => <Code document={document} />,
     undefined: (document: any) => {
       {
         console.log("undefined type");
