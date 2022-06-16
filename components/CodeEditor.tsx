@@ -4,22 +4,30 @@ import { basicSetup } from "codemirror";
 import { defaultKeymap } from "@codemirror/commands";
 import { python } from "@codemirror/lang-python";
 import React, { useEffect, useRef, useState } from "react";
+import { tomorrow } from "thememirror";
 
-export const CodeEditor = () => {
+interface CodeEditorProps {
+  setCode: (code: string) => void;
+}
+
+export const CodeEditor = ({ setCode }: CodeEditorProps) => {
   const container = useRef<HTMLDivElement>(null);
-  const [startState, setStartState] = useState<EditorState>();
+  const [editorState, setEditorState] = useState<EditorState>();
   const [view, setView] = useState<EditorView>();
   useEffect(() => {
     initCodeEditor();
 
     function initCodeEditor() {
-      setStartState(EditorState.create({}));
-      view?.destroy();
+      setEditorState(EditorState.create({}));
       setView(
         new EditorView({
-          doc: "hello world",
-          extensions: [basicSetup, keymap.of(defaultKeymap), python()],
-          state: startState,
+          extensions: [
+            basicSetup,
+            keymap.of(defaultKeymap),
+            python(),
+            tomorrow,
+          ],
+          state: editorState,
           parent: container.current,
         })
       );
