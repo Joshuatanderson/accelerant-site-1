@@ -1,35 +1,41 @@
-// view at: https://stackblitz.com/edit/vitejs-vite-8s3guc?file=src%2FEditor.tsx&terminal=dev
-import React, { useRef, useEffect } from "react";
-import { EditorView, ViewUpdate } from "@codemirror/view";
-import { EditorState, Extension } from "@codemirror/state";
+import React, { useRef, useEffect, useState } from "react";
+
 import { basicSetup } from "codemirror";
-import { python } from "@codemirror/lang-python";
+import { EditorView, keymap } from "@codemirror/view";
+import { defaultKeymap, indentWithTab } from "@codemirror/commands";
 import { oneDark } from "@codemirror/theme-one-dark";
+import { python } from "@codemirror/lang-python";
+import { EditorState } from "@codemirror/state";
 
-interface EditorProps {
-  value?: string;
-  onUpdate?: (update: ViewUpdate) => void;
-}
+//dev.to/adamcollier/adding-codemirror-6-to-a-react-project-36hl
+export const CodeEditor = () => {
+  const editor = useRef();
+  const [code, setCode] = useState("");
 
-export const CodeEditor = ({ value = "", onUpdate }: EditorProps) => {
-  const editor = useRef<HTMLDivElement>(null);
-  let state: EditorState;
-  let view: EditorView;
+  const onUpdate = EditorView.updateListener.of((v) => {
+    setCode(v.state.doc.toString());
+  });
 
   useEffect(() => {
-    const extensions: Extension[] = [basicSetup, oneDark];
-    if (onUpdate) extensions.push(EditorView.updateListener.of(onUpdate));
+    const startState = EditorState.create({
+      doc: "print('Hello World')",
+      extensions: [
+        basicSetup,
+        keymap.of([defaultKeymap, indentWithTab]),
+        oneDark,
+        python(),
+        onUpdate,
+      ],
+    });
 
-    if (!view || !state) {
-      state = EditorState.create({
-        doc: value,
-        extensions: [basicSetup, python(), oneDark],
-      });
-      view = new EditorView({ state, parent: editor.current! });
-    }
-
-    return () => view.destroy();
+    const view = new EditorView({
+      state: startState,
+      parent: editor.current,
+    });
+    return () => {
+      view.destroy();
+    };
   }, []);
 
-  return <div ref={editor} />;
+  return <div ref={editor}></div>;
 };
