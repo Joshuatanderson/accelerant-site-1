@@ -7,7 +7,7 @@ interface CodeRunnerProps {
 }
 
 const CodeRunner = ({ code }: CodeRunnerProps) => {
-  const [outputText, setOutputText] = useState("");
+  const [outputText, setOutputText] = useState<string[]>([]);
   const [errorText, setErrorText] = useState("");
   const output = useRef();
   const canvas = useRef();
@@ -15,12 +15,22 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
   const handleUpdateOutput = async (output: string) => {
     console.log(output);
     // console.log(code);
-    await setOutputText((prev) => prev + output);
+    await setOutputText((prev) => [...prev, output]);
     // console.log(outputText);
   };
 
   const handleClearOutput = () => {
-    setOutputText("");
+    setOutputText([]);
+  };
+
+  const createConsoleLines = (outputText: string[]) => {
+    return outputText.map((line, index) => {
+      return (
+        <div key={`console:${index}`} className="p-sm">
+          {line}
+        </div>
+      );
+    });
   };
 
   function builtinRead(x: string) {
@@ -61,7 +71,7 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
       <button onClick={handleRun}>run</button>
       <button onClick={handleClearOutput}>clear output</button>
       <div ref={output} id="output">
-        {outputText}
+        {createConsoleLines(outputText)}
         <p className="text-red">{errorText}</p>
       </div>
       <div ref={canvas} id="mycanvas"></div>
