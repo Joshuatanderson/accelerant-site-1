@@ -7,10 +7,13 @@ import { oneDark } from "@codemirror/theme-one-dark";
 import { python } from "@codemirror/lang-python";
 import { EditorState } from "@codemirror/state";
 
+interface CodeEditorProps {
+  setCode: (code: string) => void;
+}
+
 //dev.to/adamcollier/adding-codemirror-6-to-a-react-project-36hl
-export const CodeEditor = () => {
+export const CodeEditor = ({ setCode }: CodeEditorProps) => {
   const editor = useRef();
-  const [code, setCode] = useState("");
 
   const onUpdate = EditorView.updateListener.of((v) => {
     setCode(v.state.doc.toString());
@@ -32,6 +35,7 @@ export const CodeEditor = () => {
       state: startState,
       parent: editor.current,
     });
+
     return () => {
       view.destroy();
     };

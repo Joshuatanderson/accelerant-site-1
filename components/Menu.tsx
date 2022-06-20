@@ -31,6 +31,11 @@ const pages: Page[] = [
     slug: "content",
     id: "6340e77d-48fa-491f-8835-55a2f00d1d06",
   },
+  {
+    display: "Sandbox",
+    slug: "sandbox",
+    id: "cec4fd49-65b5-479d-8102-e327ac16bacf",
+  },
 ];
 
 export default function Menu() {

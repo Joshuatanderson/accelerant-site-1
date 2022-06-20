@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { CodeEditor } from "./CodeEditor";
+import CodeRunner from "./CodeRunner";
 
 const Sandbox = () => {
+  const [code, setCode] = useState("");
   return (
-    <div id="sandbox">
-      <CodeEditor />
+    <div>
+      <div id="sandbox">
+        <CodeEditor setCode={setCode} />
+        <CodeRunner code={code} />
+      </div>
     </div>
   );
 };
