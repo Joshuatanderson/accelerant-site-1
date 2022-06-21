@@ -13,10 +13,7 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
   const canvas = useRef();
 
   const handleUpdateOutput = async (output: string) => {
-    console.log(output);
-    // console.log(code);
     await setOutputText((prev) => [...prev, output]);
-    // console.log(outputText);
   };
 
   const handleClearOutput = () => {
@@ -43,7 +40,6 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
   }
 
   const handleRun = async () => {
-    console.log(code);
     skulpt.configure({
       output: handleUpdateOutput,
       read: builtinRead,
@@ -61,7 +57,7 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
         true
       ); //ts-ignore
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setErrorText(err.message);
     }
   };

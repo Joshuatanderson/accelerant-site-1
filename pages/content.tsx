@@ -29,8 +29,6 @@ export async function getStaticProps() {
     )
     .catch(console.error);
 
-  console.log(contents);
-
   return {
     props: {
       contents,
@@ -49,7 +47,6 @@ export default function Content({ contents }: Content) {
     }
   }, []);
 
-  console.log(contents);
   return (
     <Layout title="Content" rootPath="/content">
       {contents.map((content) => (

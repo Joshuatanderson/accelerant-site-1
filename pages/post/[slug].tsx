@@ -27,7 +27,7 @@ const components = {
     code: (document: any) => <Code document={document} />,
     undefined: (document: any) => {
       {
-        console.log("undefined type");
+        console.warn("undefined type");
         return null;
       }
     },
@@ -93,7 +93,6 @@ export async function getStaticProps({ params }: Context) {
       }`
     )
     .catch((err) => console.error(err));
-  console.log(posts[0]);
 
   // this is done to prevent build errors on JSON serialization
   const stringifiedPost = JSON.stringify(posts[0], (key, val) => {

@@ -24,8 +24,6 @@ export async function getStaticProps() {
     )
     .catch(console.error);
 
-  console.log(posts);
-
   return {
     props: {
       posts,
@@ -34,7 +32,6 @@ export async function getStaticProps() {
 }
 
 export default function Examples({ posts }: Examples) {
-  console.log(posts);
   return (
     <Layout title="Examples" rootPath="/examples">
       {posts.map((post) => (
