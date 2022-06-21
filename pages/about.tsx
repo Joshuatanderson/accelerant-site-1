@@ -9,7 +9,6 @@ const About = () => {
       <section>
         <h2>Our Story</h2>
         <div>
-          <Image src="/joshua.jpeg" width={100} height={100} />
           <div>
             <p>
               The seed for Accelerant was planted when our founder talked with
