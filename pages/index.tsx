@@ -103,9 +103,26 @@ const Home: NextPage = () => {
           We are currently looking for districts and schools who are excited
           about:
         </p>
-        <div>Python Training</div>
-        <div>Project-Based Learning</div>
-        <div>Co-authoring with us</div>
+        <div>
+          <Image
+            src="/illustrations/programming.svg"
+            width={100}
+            height={100}
+          ></Image>
+          Python Training
+        </div>
+        <div>
+          <Image src="/illustrations/team.svg" width={100} height={100}></Image>
+          Project-Based Learning
+        </div>
+        <div>
+          <Image
+            src="/illustrations/coauthoring.svg"
+            width={100}
+            height={100}
+          ></Image>
+          Co-authoring with us
+        </div>
         <div>
           <button>
             <Link href="/contact">Want to know more?</Link>
