@@ -36,6 +36,11 @@ const pages: Page[] = [
     slug: "sandbox",
     id: "cec4fd49-65b5-479d-8102-e327ac16bacf",
   },
+  {
+    display: "Case Studies",
+    slug: "case-studies",
+    id: "c183b13c-2914-4244-bd03-15f55561f6cf",
+  },
 ];
 
 export default function Menu() {
