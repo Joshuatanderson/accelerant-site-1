@@ -19,10 +19,8 @@ function MyApp({ Component, pageProps: { ...pageProps } }: AppProps) {
   return (
     <CssBaseline>
       <AuthUserProvider>
-        {/* <Box sx={classes.container}> */}
         <Header />
         <Component {...pageProps} />
-        {/* </Box> */}
       </AuthUserProvider>
     </CssBaseline>
   );
