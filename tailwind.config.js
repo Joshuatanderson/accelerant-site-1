@@ -25,9 +25,16 @@ module.exports = {
           // '"Segoe UI Emoji"',
           // '"Segoe UI Symbol"'
         ] // Ensure fonts with spaces have " " surrounding it.
-      }
-    }
-  },
+      },
+        colors: {
+          "aDark":"#07282a",
+          "aLight":"#f8ebd2",
+          "aPrimary": "#1b8593",
+          "aSecondary": "#fdaf3a"
+        }
+    },
+    
+  }, 
   plugins: [
     // "postcss-import",
     "tailwindcss",

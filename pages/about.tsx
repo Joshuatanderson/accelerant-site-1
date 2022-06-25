@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import Partners from "../components/Partners";
 import Team from "../components/Team";
 
 const About = () => {
   return (
     <div>
-      <div className="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
+      <div className="mx-auto py-4 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
         {/* <div className="space-y-12"> */}
         <h1 className="text-4xl font-bold leading-tight">About</h1>
         {/* </div> */}
@@ -37,16 +38,8 @@ const About = () => {
       </section>
       <section></section>
       <section>
-        <h3>Partners</h3>
-        <div>
-          <Image src="/partners/ebrps.png" width={200} height={100} />
-        </div>
-        <div>
-          <Image src="/partners/cmu.png" width={200} height={100}></Image>
-        </div>
-        <div>
-          <Image src="/partners/bigBuddy.png" width={200} height={100} />
-        </div>
+        <Partners />
+
         <div>
           <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <Link href="/success-stories">success stories</Link>
