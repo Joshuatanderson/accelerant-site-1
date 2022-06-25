@@ -4,7 +4,7 @@ import Sandbox from "../components/Sandbox";
 const sandbox = () => {
   return (
     <>
-      <div className="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
+      <div className="mx-auto px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
         {/* <div className="space-y-12"> */}
         <h1 className="text-4xl font-bold leading-tight">Sandbox</h1>
         {/* </div> */}
