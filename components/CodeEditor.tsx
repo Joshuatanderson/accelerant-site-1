@@ -24,6 +24,7 @@ export const CodeEditor = ({ setCode }: CodeEditorProps) => {
       doc: "print('Hello World')",
       extensions: [
         basicSetup,
+        //@ts-ignore
         keymap.of([defaultKeymap, indentWithTab]),
         oneDark,
         python(),
@@ -41,5 +42,6 @@ export const CodeEditor = ({ setCode }: CodeEditorProps) => {
     };
   }, []);
 
+  //@ts-ignore
   return <div ref={editor}></div>;
 };

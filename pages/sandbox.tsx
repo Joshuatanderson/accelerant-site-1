@@ -13,11 +13,11 @@ const sandbox = () => {
         <div className="space-y-12">
           <div className="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
             <p className="text-xl text-gray-500">
-              This page is undergoing active development. We're making a python
-              environment that can run real code, right in your browser.
+              This page is undergoing active development. We&apos;re making a
+              python environment that can run real code, right in your browser.
             </p>
             <p className="text-xl text-gray-500">
-              It's more fun to build in public. :-)
+              It&apos;s more fun to build in public. :-)
             </p>
           </div>
         </div>

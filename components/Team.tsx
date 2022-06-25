@@ -36,9 +36,9 @@ const Team = () => {
                 Our Team
               </h2>
               <p className="text-xl text-gray-500">
-                We're grateful to have a team of incredibly talented people from
-                a diverse set of backgrounds. We're united by the goal of
-                enabling every child to have access to computer science.
+                We&apos;re grateful to have a team of incredibly talented people
+                from a diverse set of backgrounds. We&apos;re united by the goal
+                of enabling every child to have access to computer science.
               </p>
             </div>
             <ul

@@ -34,7 +34,7 @@ const components = {
   },
 };
 
-export default function content({ content }: contentProps) {
+export default function Content({ content }: contentProps) {
   const imageProps = useNextSanityImage(client, content?.mainImage);
 
   return (

@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import skulpt from "skulpt";
-import ErrorBoundary from "./ErrorBoundary";
 
 interface CodeRunnerProps {
   code: string;
@@ -32,17 +31,22 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
 
   function builtinRead(x: string) {
     if (
+      //@ts-ignore
       skulpt.builtinFiles === undefined ||
+      //@ts-ignore
       skulpt.builtinFiles["files"][x] === undefined
     )
       throw "File not found: '" + x + "'";
+    //@ts-ignore
     return skulpt.builtinFiles["files"][x]; //ts-ignore
   }
 
   const handleRun = async () => {
+    //@ts-ignore
     skulpt.configure({
       output: handleUpdateOutput,
       read: builtinRead,
+      //@ts-ignore
       __future__: skulpt.python3,
     }); //ts-ignore
 
@@ -50,6 +54,7 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
     // TODO: implement handling errors
     try {
       // TODO: ensure that suspendable functions work
+      //@ts-ignore
       const module = await skulpt.importMainWithBody(
         "<stdin>",
         false,
@@ -58,12 +63,13 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
       ); //ts-ignore
     } catch (err) {
       console.error(err);
+      //@ts-ignore
       setErrorText(err.message);
     }
   };
 
   return (
-    <ErrorBoundary>
+    <>
       <button
         className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         onClick={handleRun}
@@ -76,12 +82,14 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
       >
         clear output
       </button>
+      {/* @ts-ignore */}
       <div ref={output} id="output">
         {createConsoleLines(outputText)}
         <p className="text-red">{errorText}</p>
       </div>
+      {/* @ts-ignore */}
       <div ref={canvas} id="mycanvas"></div>
-    </ErrorBoundary>
+    </>
   );
 };
 

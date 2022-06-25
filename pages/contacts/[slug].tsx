@@ -58,7 +58,7 @@ export async function getStaticPaths(slug: any) {
   return {
     paths: people.map((slug) => ({
       params: {
-        slug: `/post/${slug}`,
+        slug: `${slug}`,
       },
     })),
     fallback: true,
@@ -69,9 +69,9 @@ export async function getStaticProps({ params }: GetStaticPropsParams) {
   const person = people[params.slug];
   return {
     props: {
-      slug: params.slug,
-      display: person.display,
-      code: person.code,
+      slug: params?.slug,
+      display: person?.display,
+      code: person?.code,
     },
   };
 }

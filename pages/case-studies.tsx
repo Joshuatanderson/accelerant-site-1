@@ -23,8 +23,8 @@ const caseStudies = () => {
         <h3>Big Buddy Program Python Class</h3>
         <p>
           We are partnering with the Big Buddy Program to teach Python to a
-          group of highschool students. This program is a part of the Mayor's
-          Youth Workforce Experience program.
+          group of highschool students. This program is a part of the
+          Mayor&apos;s Youth Workforce Experience program.
         </p>
         <p>
           Students are learning Python from the ground up through project-based
