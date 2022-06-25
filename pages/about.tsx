@@ -14,6 +14,8 @@ const About = () => {
               The seed for Accelerant was planted when our founder talked with
               educators across the country and realized that millions of
               children have no access to foundational computer science courses.
+            </p>
+            <p>
               As a self-taught developer, he knew that learning to code was
               really difficult - especially when done outside of a well-planned
               pedagogical system. Accelerant was born out of a desire to give
@@ -23,6 +25,7 @@ const About = () => {
         </div>
       </section>
       <section>
+        <h3>Team</h3>
         <div>
           <Image src="/team/joshua.jpeg" width={100} height={100} />
           <p>Joshua Anderson</p>
@@ -48,7 +51,9 @@ const About = () => {
           <Image src="/partners/bigBuddy.png" width={200} height={100} />
         </div>
         <div>
-          <button>success stories</button>
+          <button>
+            <Link href="/success-stories">success stories</Link>
+          </button>
           <button>
             <Link href="/contact">contact us</Link>
           </button>
