@@ -5,15 +5,16 @@ delete FairyGates.googleFonts;
 
 const typography = new Typography(FairyGates)
 
-// FairyGates.overrideThemeStyles = ({ rhythm }, options) => ({
-//   "h1,h2,h3,h4,h5,h6": {
-//     marginTop: rhythm(1 / 2),
-//   },
-//   h1: {
-//     fontWeight: 900,
-//     letterSpacing: "-1px",
-//   },
-// });
+FairyGates.overrideThemeStyles = ({ rhythm }, options) => ({
+  "h1,h2,h3,h4,h5,h6": {
+    marginTop: rhythm(1 / 2),
+  },
+
+  h1: {
+    fontWeight: 900,
+    letterSpacing: "-1px",
+  },
+});
 // FairyGates.scaleRatio = 5 / 2;
 
 // Hot reload typography in development.
