@@ -22,13 +22,13 @@ export default function Partners() {
                   alt="Big Buddy Program"
                 />
               </div>
-              {/* <div className="mt-4 ml-8 flex flex-grow flex-shrink-0 justify-center lg:flex-grow-0 lg:ml-4">
+              <div className="mt-4 ml-8 flex flex-grow flex-shrink-0 justify-center lg:flex-grow-0 lg:ml-4">
                 <img
                   className="h-12"
                   src="/partners/cmu.png"
                   alt="Carnegie Mellon University"
                 />
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
