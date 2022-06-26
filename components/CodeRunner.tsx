@@ -23,7 +23,7 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
     return outputText.map((line, index) => {
       return (
         <div key={`console:${index}`} className="p-sm">
-          {line}
+          <p className="text-xl text-gray-500">{line}</p>
         </div>
       );
     });
@@ -88,14 +88,21 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
           </button>
         </div>
       </div>
-
-      {/* @ts-ignore */}
-      <div ref={output} id="output">
-        {createConsoleLines(outputText)}
-        <p className="text-red">{errorText}</p>
+      <div className="bg-white">
+        <div className="mx-auto py-6 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
+          <div className="space-y-12">
+            <div
+              /* @ts-ignore */
+              ref={output}
+              id="output"
+              className="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
+            >
+              {createConsoleLines(outputText)}
+              <p className="text-red">{errorText}</p>
+            </div>
+          </div>
+        </div>
       </div>
-      {/* @ts-ignore */}
-      <div ref={canvas} id="mycanvas"></div>
     </>
   );
 };
