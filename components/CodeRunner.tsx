@@ -5,9 +5,17 @@ interface CodeRunnerProps {
   code: string;
 }
 
+interface SkulptError {
+  $d: any;
+  args: any;
+  traceback: any;
+}
+
 const CodeRunner = ({ code }: CodeRunnerProps) => {
   const [outputText, setOutputText] = useState<string[]>([]);
   const [errorText, setErrorText] = useState("");
+  const [stackTrace, setStackTrace] = useState("");
+  const [showStackTrace, setShowStackTrace] = useState(false);
   const output = useRef();
   const canvas = useRef();
 
@@ -17,6 +25,9 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
 
   const handleClearOutput = () => {
     setOutputText([]);
+  };
+  const handleToggleStackTrace = () => {
+    setShowStackTrace(!showStackTrace);
   };
 
   const createConsoleLines = (outputText: string[]) => {
@@ -48,7 +59,22 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
       read: builtinRead,
       //@ts-ignore
       __future__: skulpt.python3,
-    }); //ts-ignore
+    }); //@ts-ignore
+    (skulpt.TurtleGraphics || (skulpt.TurtleGraphics = {})).target = "canvas";
+    //@ts-ignore
+    const promise = skulpt.misceval.asyncToPromise(function () {
+      console.log(code);
+      return skulpt.importMainWithBody("<stdin>", false, code, true);
+    });
+
+    promise.then(
+      function (mod: any) {
+        console.log("success");
+      },
+      function (err: SkulptError) {
+        console.error(err);
+      }
+    );
 
     // TODO: impement turtle
     // TODO: implement handling errors
@@ -61,10 +87,26 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
         code,
         true
       ); //ts-ignore
-    } catch (err) {
-      console.error(err);
+      setErrorText("");
+      setStackTrace("");
+    } catch (err: any) {
+      setErrorText(err.toString());
+      if (err.traceback) {
+        console.log("has traceback");
+        let traceback = "";
+        for (let i = 0; i < err.traceback.length; i++) {
+          traceback +=
+            "\n  at " +
+            err.traceback[i].filename +
+            " line " +
+            err.traceback[i].lineno;
+          if ("colno" in err.traceback[i]) {
+            traceback += " column " + err.traceback[i].colno;
+          }
+        }
+        setStackTrace(traceback);
+      }
       //@ts-ignore
-      setErrorText(err.message);
     }
   };
 
@@ -80,6 +122,12 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
           </button>
         </div>
         <div className="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
+          <button
+            onClick={handleToggleStackTrace}
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-aDark hover:bg-aPrimary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-5"
+          >
+            {showStackTrace ? "Hide" : "Show"} Stack Trace
+          </button>
           <button
             onClick={handleClearOutput}
             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-aDark hover:bg-aPrimary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -97,9 +145,21 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
               id="output"
               className="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none"
             >
+              <p className="text-xl text-red-500">{errorText}</p>
+              {showStackTrace && (
+                <div id="stacktrace">
+                  <p className="text-xl text-grey-700">{stackTrace}</p>
+                </div>
+              )}
+
               {createConsoleLines(outputText)}
-              <p className="text-red">{errorText}</p>
             </div>
+
+            <div
+              id="canvas"
+              // @ts-ignore
+              ref={canvas}
+            ></div>
           </div>
         </div>
       </div>
