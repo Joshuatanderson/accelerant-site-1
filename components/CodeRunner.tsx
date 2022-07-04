@@ -69,45 +69,30 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
 
     promise.then(
       function (mod: any) {
+        setErrorText("");
+        setStackTrace("");
         console.log("success");
       },
       function (err: SkulptError) {
+        setErrorText(err.toString());
+        if (err.traceback) {
+          console.log("has traceback");
+          let traceback = "";
+          for (let i = 0; i < err.traceback.length; i++) {
+            traceback +=
+              "\n  at " +
+              err.traceback[i].filename +
+              " line " +
+              err.traceback[i].lineno;
+            if ("colno" in err.traceback[i]) {
+              traceback += " column " + err.traceback[i].colno;
+            }
+          }
+          setStackTrace(traceback);
+        }
         console.error(err);
       }
     );
-
-    // TODO: impement turtle
-    // TODO: implement handling errors
-    try {
-      // TODO: ensure that suspendable functions work
-      //@ts-ignore
-      const module = await skulpt.importMainWithBody(
-        "<stdin>",
-        false,
-        code,
-        true
-      ); //ts-ignore
-      setErrorText("");
-      setStackTrace("");
-    } catch (err: any) {
-      setErrorText(err.toString());
-      if (err.traceback) {
-        console.log("has traceback");
-        let traceback = "";
-        for (let i = 0; i < err.traceback.length; i++) {
-          traceback +=
-            "\n  at " +
-            err.traceback[i].filename +
-            " line " +
-            err.traceback[i].lineno;
-          if ("colno" in err.traceback[i]) {
-            traceback += " column " + err.traceback[i].colno;
-          }
-        }
-        setStackTrace(traceback);
-      }
-      //@ts-ignore
-    }
   };
 
   return (
