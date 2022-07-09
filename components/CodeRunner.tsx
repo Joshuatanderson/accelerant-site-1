@@ -64,6 +64,7 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
     //@ts-ignore
     const promise = skulpt.misceval.asyncToPromise(function () {
       console.log(code);
+      //@ts-ignore
       return skulpt.importMainWithBody("<stdin>", false, code, true);
     });
 
