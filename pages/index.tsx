@@ -116,7 +116,7 @@ const Home: NextPage = () => {
                     Equity Oriented
                   </h5>
                   <p className="text-xl text-gray-500">
-                    We are committed to doing whatever it takies to empower your
+                    We are committed to doing whatever it takes to empower your
                     students. Everyone deserves a chance to code, regardless of
                     race, gender, or status.
                   </p>
