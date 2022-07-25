@@ -54,6 +54,10 @@ const navigation = [
     name: "Projects",
     href: "/case-studies",
   },
+  {
+    name: "Shorts",
+    href: "/shorts",
+  },
 ];
 export default function Header() {
   return (

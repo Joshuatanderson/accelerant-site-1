@@ -41,6 +41,11 @@ const pages: Page[] = [
     slug: "case-studies",
     id: "c183b13c-2914-4244-bd03-15f55561f6cf",
   },
+  {
+    display: "Shorts",
+    slug: "shorts",
+    id: "73dd03fb-fd8d-43fa-936b-5c5bd5d957ff",
+  },
 ];
 
 export default function Menu() {
