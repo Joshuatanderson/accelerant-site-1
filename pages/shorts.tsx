@@ -31,7 +31,7 @@ export async function getStaticProps() {
   };
 }
 
-const shorts = ({ shorts }: Shorts) => {
+const Shorts = ({ shorts }: Shorts) => {
   const container = useRef(null);
 
   useEffect(() => {
@@ -41,9 +41,8 @@ const shorts = ({ shorts }: Shorts) => {
       left: 0,
       behavior: "smooth",
     });
-    // }
   }, []);
-  console.log(shorts);
+
   const makeVideos = (shorts: SanityDocument[]) => {
     return shorts.map((short: SanityDocument) => {
       return (
@@ -72,4 +71,4 @@ const shorts = ({ shorts }: Shorts) => {
   );
 };
 
-export default shorts;
+export default Shorts;
