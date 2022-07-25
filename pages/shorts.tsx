@@ -14,6 +14,7 @@ export async function getStaticProps() {
     .fetch(
       groq`*[_type == "videoBlogPost" && isShort == true]{
         title,
+        description,
         slug,
         _createdAt,
         _id,
@@ -49,18 +50,16 @@ const shorts = ({ shorts }: Shorts) => {
         <Short
           key={short.video.asset._id}
           title={short.title}
+          description={short.description}
           playbackId={short?.video?.asset?.playbackId}
         />
       );
     });
   };
 
-  // max width if desktop -
-  // max width if mobile - 100%
-
   return (
-    <div>
-      <div className={`mx-auto py-4 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24`}>
+    <div className={`mx-auto py-4 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24`}>
+      <div>
         <h1 className={` text-4xl font-bold leading-tight `}>Shorts</h1>
       </div>
       <div
