@@ -27,10 +27,14 @@ const Short = ({ playbackId, title, description }: ShortProps) => {
         playerRef={playerRef}
         // TODO: replace with correct id fetching mechanism
         src={`https://stream.mux.com/${playbackId}.m3u8`}
+        poster={`https://image.mux.com/${playbackId}/thumbnail.jpg`}
         autoPlay={false}
+        hlsConfig={{ liveDurationInfinity: true }}
+        style={{ background: "white" }}
         controls={true}
         width="100%"
-        height={200}
+        height="auto"
+        playsInline
       />
     </div>
   );

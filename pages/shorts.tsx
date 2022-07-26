@@ -45,6 +45,7 @@ const Shorts = ({ shorts }: Shorts) => {
 
   const makeVideos = (shorts: SanityDocument[]) => {
     return shorts.map((short: SanityDocument) => {
+      console.log(short);
       return (
         <Short
           key={short.video.asset._id}
