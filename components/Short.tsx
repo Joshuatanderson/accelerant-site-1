@@ -18,7 +18,7 @@ const Short = ({ playbackId, title, description }: ShortProps) => {
 
   return (
     <div className="flex">
-      <div className="mx-auto mr-4 py-4 sm:block sm:w-1/2">
+      <div className="hidden mx-auto mr-4 py-4 sm:block sm:w-1/2">
         <p className="text-xl font-bold">{title}</p>
         {description && <p className="text-xl text-gray-500">{description}</p>}
       </div>

@@ -57,7 +57,9 @@ const Shorts = ({ shorts }: Shorts) => {
   };
 
   return (
-    <div className={`mx-auto py-4 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24`}>
+    <div
+      className={`mx-auto sm:py-4 sm:px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24`}
+    >
       <div>
         <h1 className={` text-4xl font-bold leading-tight `}>Shorts</h1>
       </div>
