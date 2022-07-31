@@ -23,7 +23,7 @@ const Short = ({ playbackId, title, description }: ShortProps) => {
         {description && <p className="text-xl text-gray-500">{description}</p>}
       </div>
       <ReactHlsPlayer
-        className="snap-start sm:w-1/2"
+        className="snap-start sm:w-1/2 min-h-full"
         playerRef={playerRef}
         // TODO: replace with correct id fetching mechanism
         src={`https://stream.mux.com/${playbackId}.m3u8`}
