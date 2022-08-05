@@ -23,6 +23,8 @@
     "@heroicons/react": "^1.0.6",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.3",
+    "@mux/mux-player-react": "^0.1.0-beta.24",
+    "@mux/videojs-kit": "^0.11.1",
     "@portabletext/react": "^1.0.6",
     "@reach/menu-button": "^0.16.2",
     "@sanity/client": "^3.3.0",

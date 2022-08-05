@@ -50,6 +50,7 @@ const Shorts = ({ shorts }: Shorts) => {
         <Short
           key={short.video.asset._id}
           title={short.title}
+          id={short._id}
           description={short.description}
           playbackId={short?.video?.asset?.playbackId}
         />
@@ -61,9 +62,10 @@ const Shorts = ({ shorts }: Shorts) => {
     <div
       className={`mx-auto sm:py-4 sm:px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24`}
     >
-      <div>
-        <h1 className={` text-4xl font-bold leading-tight `}>Shorts</h1>
+      <div className="mx-auto py-4 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
+        <h1 className="text-4xl font-bold leading-tight">Shorts</h1>
       </div>
+
       <div
         ref={container}
         className="flex flex-col snap-y snap-mandatory h-screen w-full overflow-y-auto"

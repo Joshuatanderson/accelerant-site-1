@@ -1,0 +1,1 @@
+declare module "@mux/videojs-kit/dist/index.vhs.js"
