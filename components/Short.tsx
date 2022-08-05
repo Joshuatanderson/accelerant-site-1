@@ -29,7 +29,7 @@ const Short = ({ playbackId, title, description, id }: ShortProps) => {
     <div style={classes.container} className="snap-start flex sm:h-1/2">
       <div className="sm:w-1/2">
         <MuxPlayer
-          className="h-screen sm:h-full"
+          className="h-screen sm:h-full w-screen sm:w-full"
           style={{ maxHeight: "100vh" }}
           playbackId={playbackId}
           metadata={{
