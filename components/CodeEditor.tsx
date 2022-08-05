@@ -43,5 +43,5 @@ export const CodeEditor = ({ setCode }: CodeEditorProps) => {
   }, []);
 
   //@ts-ignore
-  return <div ref={editor}></div>;
+  return <div ref={editor} className="px-4"></div>;
 };
