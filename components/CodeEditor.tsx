@@ -5,14 +5,22 @@ import { EditorView, keymap } from "@codemirror/view";
 import { defaultKeymap, indentWithTab } from "@codemirror/commands";
 import { oneDark } from "@codemirror/theme-one-dark";
 import { python } from "@codemirror/lang-python";
+import { javascript } from "@codemirror/lang-javascript";
 import { EditorState } from "@codemirror/state";
+import { languageOptions } from "languageOptions";
 
 interface CodeEditorProps {
   setCode: (code: string) => void;
+  lang: languageOptions;
 }
 
+const langMap = {
+  python: python,
+  javascript: javascript,
+};
+
 //dev.to/adamcollier/adding-codemirror-6-to-a-react-project-36hl
-export const CodeEditor = ({ setCode }: CodeEditorProps) => {
+export const CodeEditor = ({ setCode, lang }: CodeEditorProps) => {
   const editor = useRef();
 
   const onUpdate = EditorView.updateListener.of((v) => {
@@ -27,7 +35,7 @@ export const CodeEditor = ({ setCode }: CodeEditorProps) => {
         //@ts-ignore
         keymap.of([defaultKeymap, indentWithTab]),
         oneDark,
-        python(),
+        langMap[lang](),
         onUpdate,
       ],
     });

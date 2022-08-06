@@ -1,17 +1,19 @@
+import { languageOptions } from "languageOptions";
 import React, { useRef, useState } from "react";
-import skulpt from "skulpt";
+import { runPython } from "../langEnvironments/python";
 
 interface CodeRunnerProps {
   code: string;
+  lang: languageOptions;
 }
 
-interface SkulptError {
-  $d: any;
-  args: any;
-  traceback: any;
-}
+const languageRunnerMap = {
+  py: runPython,
+  js: runPython,
+};
 
-const CodeRunner = ({ code }: CodeRunnerProps) => {
+const CodeRunner = ({ code, lang }: CodeRunnerProps) => {
+  console.log(lang);
   const [outputText, setOutputText] = useState<string[]>([]);
   const [errorText, setErrorText] = useState("");
   const [stackTrace, setStackTrace] = useState("");
@@ -40,68 +42,19 @@ const CodeRunner = ({ code }: CodeRunnerProps) => {
     });
   };
 
-  function builtinRead(x: string) {
-    if (
-      //@ts-ignore
-      skulpt.builtinFiles === undefined ||
-      //@ts-ignore
-      skulpt.builtinFiles["files"][x] === undefined
-    )
-      throw "File not found: '" + x + "'";
-    //@ts-ignore
-    return skulpt.builtinFiles["files"][x]; //ts-ignore
-  }
-
-  const handleRun = async () => {
-    //@ts-ignore
-    skulpt.configure({
-      output: handleUpdateOutput,
-      read: builtinRead,
-      //@ts-ignore
-      __future__: skulpt.python3,
-    }); //@ts-ignore
-    (skulpt.TurtleGraphics || (skulpt.TurtleGraphics = {})).target = "canvas";
-    //@ts-ignore
-    const promise = skulpt.misceval.asyncToPromise(function () {
-      console.log(code);
-      //@ts-ignore
-      return skulpt.importMainWithBody("<stdin>", false, code, true);
-    });
-
-    promise.then(
-      function (mod: any) {
-        setErrorText("");
-        setStackTrace("");
-        console.log("success");
-      },
-      function (err: SkulptError) {
-        setErrorText(err.toString());
-        if (err.traceback) {
-          console.log("has traceback");
-          let traceback = "";
-          for (let i = 0; i < err.traceback.length; i++) {
-            traceback +=
-              "\n  at " +
-              err.traceback[i].filename +
-              " line " +
-              err.traceback[i].lineno;
-            if ("colno" in err.traceback[i]) {
-              traceback += " column " + err.traceback[i].colno;
-            }
-          }
-          setStackTrace(traceback);
-        }
-        console.error(err);
-      }
-    );
-  };
-
   return (
     <>
       <div className="mx-auto py-4 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24 flex justify-between">
         <div className="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none ">
           <button
-            onClick={handleRun}
+            onClick={() =>
+              languageRunnerMap["py"](
+                code,
+                handleUpdateOutput,
+                setErrorText,
+                setStackTrace
+              )
+            }
             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-aDark hover:bg-aPrimary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Run
