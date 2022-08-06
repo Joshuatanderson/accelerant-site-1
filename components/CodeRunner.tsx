@@ -1,5 +1,6 @@
 import { languageOptions } from "languageOptions";
 import React, { useRef, useState } from "react";
+import { runJavascript } from "../langEnvironments/javascript";
 import { runPython } from "../langEnvironments/python";
 
 interface CodeRunnerProps {
@@ -8,12 +9,11 @@ interface CodeRunnerProps {
 }
 
 const languageRunnerMap = {
-  py: runPython,
-  js: runPython,
+  python: runPython,
+  javascript: runJavascript,
 };
 
 const CodeRunner = ({ code, lang }: CodeRunnerProps) => {
-  console.log(lang);
   const [outputText, setOutputText] = useState<string[]>([]);
   const [errorText, setErrorText] = useState("");
   const [stackTrace, setStackTrace] = useState("");
@@ -48,7 +48,7 @@ const CodeRunner = ({ code, lang }: CodeRunnerProps) => {
         <div className="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none ">
           <button
             onClick={() =>
-              languageRunnerMap["py"](
+              languageRunnerMap[lang](
                 code,
                 handleUpdateOutput,
                 setErrorText,
