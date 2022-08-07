@@ -1,23 +1,24 @@
 import { languageOptions } from "languageOptions";
 import React, { useRef, useState } from "react";
-import { runJavascript } from "../langEnvironments/javascript";
-import { runPython } from "../langEnvironments/python";
+import { JavascriptEnvironment } from "./JavascriptEnvironment";
+import { PythonEnvironment } from "./PythonEnvironment";
 
 interface CodeRunnerProps {
   code: string;
-  lang: languageOptions;
+  selectedLang: languageOptions;
 }
 
-const languageRunnerMap = {
-  python: runPython,
-  javascript: runJavascript,
+const langMapping = {
+  python: PythonEnvironment,
+  javascript: JavascriptEnvironment,
 };
 
-const CodeRunner = ({ code, lang }: CodeRunnerProps) => {
+const CodeRunner = ({ code, selectedLang }: CodeRunnerProps) => {
   const [outputText, setOutputText] = useState<string[]>([]);
   const [errorText, setErrorText] = useState("");
   const [stackTrace, setStackTrace] = useState("");
   const [showStackTrace, setShowStackTrace] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
   const output = useRef();
   const canvas = useRef();
 
@@ -42,19 +43,20 @@ const CodeRunner = ({ code, lang }: CodeRunnerProps) => {
     });
   };
 
+  const handleRun = () => {
+    setIsRunning(true);
+    setErrorText("");
+    setStackTrace("");
+  };
+
+  let LanguageEnvironment = langMapping[selectedLang];
+
   return (
     <>
       <div className="mx-auto py-4 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24 flex justify-between">
         <div className="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none ">
           <button
-            onClick={() =>
-              languageRunnerMap[lang](
-                code,
-                handleUpdateOutput,
-                setErrorText,
-                setStackTrace
-              )
-            }
+            onClick={handleRun}
             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-aDark hover:bg-aPrimary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Run
@@ -94,11 +96,20 @@ const CodeRunner = ({ code, lang }: CodeRunnerProps) => {
               {createConsoleLines(outputText)}
             </div>
 
-            <div
-              id="canvas"
-              // @ts-ignore
-              ref={canvas}
-            ></div>
+            {/* <LanguageEnvironment
+              code={codeToRun}
+              handleUpdateOutput={handleUpdateOutput}
+              setErrorText={setErrorText}
+              setStackTrace={setStackTrace}
+            ></LanguageEnvironment> */}
+            <PythonEnvironment
+              isRunning={isRunning}
+              setIsRunning={setIsRunning}
+              code={code}
+              handleUpdateOutput={handleUpdateOutput}
+              setErrorText={setErrorText}
+              setStackTrace={setStackTrace}
+            ></PythonEnvironment>
           </div>
         </div>
       </div>
