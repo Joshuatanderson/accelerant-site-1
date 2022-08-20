@@ -29,7 +29,7 @@ export const CodeEditor = ({ setCode, lang }: CodeEditorProps) => {
 
   useEffect(() => {
     const startState = EditorState.create({
-      doc: "print('Hello World')",
+      doc: "console.log('Hello World')",
       extensions: [
         basicSetup,
         //@ts-ignore

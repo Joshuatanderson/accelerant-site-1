@@ -28,6 +28,8 @@ const CodeRunner = ({ code, selectedLang }: CodeRunnerProps) => {
 
   const handleClearOutput = () => {
     setOutputText([]);
+    setErrorText("");
+    setStackTrace("");
   };
   const handleToggleStackTrace = () => {
     setShowStackTrace(!showStackTrace);
@@ -102,14 +104,14 @@ const CodeRunner = ({ code, selectedLang }: CodeRunnerProps) => {
               setErrorText={setErrorText}
               setStackTrace={setStackTrace}
             ></LanguageEnvironment> */}
-            <PythonEnvironment
+            <JavascriptEnvironment
               isRunning={isRunning}
               setIsRunning={setIsRunning}
               code={code}
               handleUpdateOutput={handleUpdateOutput}
               setErrorText={setErrorText}
               setStackTrace={setStackTrace}
-            ></PythonEnvironment>
+            ></JavascriptEnvironment>
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ interface PythonEnvironmentProps {
   handleUpdateOutput: (output: string) => Promise<void>;
   setErrorText: (output: string) => void;
   setStackTrace: (output: string) => void;
-  setIsRunning: () => void;
+  setIsRunning: (newValue: boolean) => void;
   isRunning: boolean;
 }
 
