@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,18 +15,16 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "*": [
-        "./types/*"
-      ]
-    }
+      "*": ["./types/*"]
+    },
+    "downlevelIteration": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "utils/typography.js"
+    "utils/typography.js",
+    "vendors/p5Wrapper.js"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

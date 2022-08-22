@@ -45,59 +45,82 @@ export const JavascriptEnvironment = ({
     if (!isRunning) {
       return;
     }
-    // const sketch = (code: string) => {
-    //   return async function (s: any) {
-    //     // console.log(p);
-    //     const {
-    //       height,
-    //       background,
-    //       draw,
-    //       setup,
-    //       preload,
-    //       mousePressed,
-    //       mouseReleased,
-    //       mouseMoved,
-    //       mouseDragged,
-    //       mouseClicked,
-    //       mouseWheel,
-    //       keyPressed,
-    //       keyReleased,
-    //       createCanvas,
-    //       resizeCanvas,
-    //       createcanvasContainer,
-    //       resizecanvasContainer,
-    //       redraw,
-    //       loop,
-    //       fill,
-    //       stroke,
-    //       frameRate,
-    //       noLoop,
-    //       noFill: noFill,
-    //       background,
-    //       line,
-    //       keyTyped,
-    //       touchStarted,
-    //       touchMoved,
-    //       touchEnded,
-    //       touchCancelled,
-    //       deviceMoved,
-    //       deviceTurned,
-    //       deviceShaken,
-    //       keyDown,
-    //       keyUp,
-    //       mouseDown,
-    //       mouseUp,
-    //       mouseOut,
-    //       mouseOver,
-    //       windowResized,
-    //     } = s;
-    //     function evalInContext() {
-    //       eval(code);
-    //     }
-    //     evalInContext.call(s);
-    //   };
-    // };
+    let sketch = async function (p: any) {
+      // const setup = () => p.setup();
+      const createCanvas = function () {
+        console.log("calling create canvas");
+        console.log(arguments);
+        p.createCanvas(...arguments);
+      };
+      const stroke = function () {
+        p.stroke(...arguments);
+      };
+      const frameRate = function () {
+        p.frameRate(...arguments);
+      };
+      // const draw = function () {
+      //   p.draw(...arguments);
+      // };
+      const background = function () {
+        p.background(...arguments);
+      };
+      const line = function () {
+        p.line(...arguments);
+      };
+      const loop = function () {
+        p.loop(...arguments);
+      };
+      const noLoop = function () {
+        p.noLoop(...arguments);
+      };
+      const getWidth = () => p.width;
+      const getHeight = () => p.height;
 
+      eval(code);
+    };
+
+    // const {
+    //   height,
+    //   draw,
+    //   setup,
+    //   preload,
+    //   mousePressed,
+    //   mouseReleased,
+    //   mouseMoved,
+    //   mouseDragged,
+    //   mouseClicked,
+    //   mouseWheel,
+    //   keyPressed,
+    //   keyReleased,
+    //   createCanvas,
+    //   resizeCanvas,
+    //   createcanvasContainer,
+    //   resizecanvasContainer,
+    //   redraw,
+    //   loop,
+    //   fill,
+    //   stroke,
+    //   frameRate,
+    //   noLoop,
+    //   noFill: noFill,
+    //   background,
+    //   line,
+    //   keyTyped,
+    //   touchStarted,
+    //   touchMoved,
+    //   touchEnded,
+    //   touchCancelled,
+    //   deviceMoved,
+    //   deviceTurned,
+    //   deviceShaken,
+    //   keyDown,
+    //   keyUp,
+    //   mouseDown,
+    //   mouseUp,
+    //   mouseOut,
+    //   mouseOver,
+    //   windowResized,
+    // } = p5;
     // let y = 0;
 
     // p.setup = () => {
@@ -122,10 +145,6 @@ export const JavascriptEnvironment = ({
     // p.mousePressed = () => {
     //   p.loop();
     // };
-    let sketch = async function (p: any) {
-      //@ts-ignore
-      eval(code);
-    };
 
     // this is done to replicate console logs to the output
     //@ts-ignore
@@ -159,7 +178,8 @@ export const JavascriptEnvironment = ({
     return () => {
       //@ts-ignore
       for (let i = 0; i < canvasContainer.current.children.length; i++) {
-        if (i !== 0) {
+        //@ts-ignore
+        if (i == 0 && canvasContainer?.current?.children?.length > 1) {
           console.info("removing old canvas");
           canvasContainer?.current?.children[i]?.remove();
         }
