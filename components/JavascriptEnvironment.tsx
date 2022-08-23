@@ -20,7 +20,7 @@ export const JavascriptEnvironment = ({
   const [p5, setP5] = useState<any>();
 
   const createNewP5 = async (
-    sketch: (p: any) => Promise<void>,
+    sketch: (p5: any) => Promise<void>,
     canvasContainer: any
   ) => {
     new p5(sketch, canvasContainer);
@@ -45,105 +45,146 @@ export const JavascriptEnvironment = ({
     if (!isRunning) {
       return;
     }
-    let sketch = async function (p: any) {
-      // const setup = () => p.setup();
-      const createCanvas = function () {
-        console.log("calling create canvas");
-        console.log(arguments);
-        p.createCanvas(...arguments);
-      };
-      const stroke = function () {
-        p.stroke(...arguments);
-      };
-      const frameRate = function () {
-        p.frameRate(...arguments);
-      };
-      // const draw = function () {
-      //   p.draw(...arguments);
-      // };
-      const background = function () {
-        p.background(...arguments);
-      };
-      const line = function () {
-        p.line(...arguments);
-      };
-      const loop = function () {
-        p.loop(...arguments);
-      };
-      const noLoop = function () {
-        p.noLoop(...arguments);
-      };
-      const getWidth = () => p.width;
-      const getHeight = () => p.height;
+    /***
+     * p5: p5 instance
+     */
+    let sketch = async function (p5: any) {
+      // @dev
+      // This is done as sugar syntax
+      // Instead of users needing to access p5 functions as "p5.stroke()"
+      // functions can be accessed at stroke()
+      // the draw, setup, and preload functions still need to be accessed as p5.draw, p5.setup, etc.
+
+      const functionsToExtract = [
+        "mousePressed",
+        "mouseReleased",
+        "mouseMoved",
+        "mouseDragged",
+        "mouseClicked",
+        "mouseWheel",
+        "keyPressed",
+        "keyReleased",
+        "createCanvas",
+        "resizeCanvas",
+        "createP",
+        "createcanvasContainer",
+        "resizecanvasContainer",
+        "bezier",
+        "redraw",
+        "loop",
+        "random",
+        "createVector",
+        "fill",
+        "stroke",
+        "noStroke",
+        "frameRate",
+        "noLoop",
+        "noFill",
+        "background",
+        "line",
+        "keyTyped",
+        "touchStarted",
+        "touchMoved",
+        "touchEnded",
+        "touchCancelled",
+        "deviceMoved",
+        "deviceTurned",
+        "deviceShaken",
+        "keyDown",
+        "keyUp",
+        "mouseDown",
+        "ellipse",
+        "mouseUp",
+        "mouseOut",
+        "mouseOver",
+        "windowResized",
+      ];
+      const extractedFunctions = Object.fromEntries(
+        new Map(
+          functionsToExtract.map((name) => [
+            name,
+            function () {
+              p5[name](...arguments);
+            },
+          ])
+        )
+      );
+
+      const {
+        mousePressed,
+        mouseReleased,
+        mouseMoved,
+        mouseDragged,
+        mouseClicked,
+        noStroke,
+        mouseWheel,
+        keyPressed,
+        bezier,
+        keyReleased,
+        createCanvas,
+        createP,
+        resizeCanvas,
+        createcanvasContainer,
+        resizecanvasContainer,
+        redraw,
+        loop,
+        fill,
+        stroke,
+        ellipse,
+        frameRate,
+        noLoop,
+        noFill,
+        background,
+        line,
+        keyTyped,
+        touchStarted,
+        touchMoved,
+        touchEnded,
+        touchCancelled,
+        deviceMoved,
+        deviceTurned,
+        deviceShaken,
+        random,
+        keyDown,
+        keyUp,
+        mouseDown,
+        mouseUp,
+        mouseOut,
+        mouseOver,
+        windowResized,
+        createVector,
+      } = extractedFunctions;
+
+      const width = () => p5.width;
+      const height = () => p5.height;
+      const mouseX = () => p5.mouseX;
+      const mouseY = () => p5.mouseY;
+      const Vector = () => new p5.constructor.Vector();
 
       eval(code);
     };
 
-    // const {
-    //   height,
-    //   draw,
-    //   setup,
-    //   preload,
-    //   mousePressed,
-    //   mouseReleased,
-    //   mouseMoved,
-    //   mouseDragged,
-    //   mouseClicked,
-    //   mouseWheel,
-    //   keyPressed,
-    //   keyReleased,
-    //   createCanvas,
-    //   resizeCanvas,
-    //   createcanvasContainer,
-    //   resizecanvasContainer,
-    //   redraw,
-    //   loop,
-    //   fill,
-    //   stroke,
-    //   frameRate,
-    //   noLoop,
-    //   noFill: noFill,
-    //   background,
-    //   line,
-    //   keyTyped,
-    //   touchStarted,
-    //   touchMoved,
-    //   touchEnded,
-    //   touchCancelled,
-    //   deviceMoved,
-    //   deviceTurned,
-    //   deviceShaken,
-    //   keyDown,
-    //   keyUp,
-    //   mouseDown,
-    //   mouseUp,
-    //   mouseOut,
-    //   mouseOver,
-    //   windowResized,
-    // } = p5;
-    // let y = 0;
+    // let y = getHeight();
 
-    // p.setup = () => {
-    //   p.createCanvas(720, 400); // Size must be the first statement
-    //   p.stroke(255); // Set line drawing color to white
-    //   p.frameRate(30);
-    //   p.noLoop();
+    // // The statements in the setup() function
+    // // execute once when the program begins
+    // p5.setup = () => {
+    //   // createCanvas must be the first statement
+    //   createCanvas(720, 400);
+    //   stroke(255); // Set line drawing color to white
+    //   frameRate(30);
     // };
     // // The statements in draw() are executed until the
     // // program is stopped. Each statement is executed in
     // // sequence and after the last line is read, the first
     // // line is executed again.
-    // p.draw = () => {
-    //   p.background(0); // Set the background to black
+    // p5.draw = () => {
+    //   background(50); // Set the background to dark grey
     //   y = y - 1;
     //   if (y < 0) {
-    //     y = p.height;
+    //     y = getHeight();
     //   }
-    //   p.line(0, y, p.width, y);
-    // };
-
-    // p.mousePressed = () => {
-    //   p.loop();
+    //   line(0, y, getWidth(), y);
     // };
 
     // this is done to replicate console logs to the output
