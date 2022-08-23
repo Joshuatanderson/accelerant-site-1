@@ -29,7 +29,14 @@ export const CodeEditor = ({ setCode, lang }: CodeEditorProps) => {
 
   useEffect(() => {
     const startState = EditorState.create({
-      doc: "console.log('Hello World')",
+      doc: `p5.setup = function(){
+  
+}
+
+p5.draw = function(){
+  
+}
+      `,
       extensions: [
         basicSetup,
         //@ts-ignore
