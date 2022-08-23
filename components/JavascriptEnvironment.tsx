@@ -95,6 +95,9 @@ export const JavascriptEnvironment = ({
         "mouseDown",
         "ellipse",
         "mouseUp",
+        "textSize",
+        "text",
+        "textAlign",
         "mouseOut",
         "mouseOver",
         "windowResized",
@@ -118,6 +121,7 @@ export const JavascriptEnvironment = ({
         mouseClicked,
         noStroke,
         mouseWheel,
+        textAlign,
         keyPressed,
         bezier,
         keyReleased,
@@ -136,6 +140,7 @@ export const JavascriptEnvironment = ({
         noFill,
         background,
         line,
+        textSize,
         keyTyped,
         touchStarted,
         touchMoved,
@@ -151,6 +156,7 @@ export const JavascriptEnvironment = ({
         mouseUp,
         mouseOut,
         mouseOver,
+        text,
         windowResized,
         createVector,
       } = extractedFunctions;
@@ -159,6 +165,9 @@ export const JavascriptEnvironment = ({
       const height = () => p5.height;
       const mouseX = () => p5.mouseX;
       const mouseY = () => p5.mouseY;
+      const CENTER = () => p5.CENTER;
+      const RIGHT = () => p5.RIGHT;
+      const LEFT = () => p5.LEFT;
       const Vector = () => new p5.constructor.Vector();
 
       eval(code);
