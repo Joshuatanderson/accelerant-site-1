@@ -51,7 +51,7 @@ const CodeRunner = ({ code, selectedLang }: CodeRunnerProps) => {
     setStackTrace("");
   };
 
-  let LanguageEnvironment = langMapping[selectedLang];
+  let LanguageEnvironment = () => langMapping[selectedLang];
 
   return (
     <>
@@ -104,14 +104,14 @@ const CodeRunner = ({ code, selectedLang }: CodeRunnerProps) => {
               setErrorText={setErrorText}
               setStackTrace={setStackTrace}
             ></LanguageEnvironment> */}
-            <JavascriptEnvironment
+            <LanguageEnvironment
               isRunning={isRunning}
               setIsRunning={setIsRunning}
               code={code}
               handleUpdateOutput={handleUpdateOutput}
               setErrorText={setErrorText}
               setStackTrace={setStackTrace}
-            ></JavascriptEnvironment>
+            ></LanguageEnvironment>
           </div>
         </div>
       </div>

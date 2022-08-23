@@ -9,7 +9,7 @@ const Sandbox = () => {
   return (
     <div>
       {/* pick language */}
-      <div>
+      <div className="mx-4 my-2">
         <label
           htmlFor="language"
           className="block text-sm font-medium text-gray-700"
@@ -23,7 +23,7 @@ const Sandbox = () => {
           defaultValue="javascript"
           onChange={(e) => setLang(e.target.value as languageOptions)}
         >
-          <option value="python">Python</option>
+          {/* <option value="python">Python</option> */}
           <option value="javascript">JavaScript</option>
         </select>
       </div>
