@@ -5,7 +5,7 @@ import { PythonEnvironment } from "./PythonEnvironment";
 
 interface CodeRunnerProps {
   code: string;
-  selectedLang: languageOptions;
+  lang: languageOptions;
 }
 
 const langMapping = {
@@ -13,7 +13,7 @@ const langMapping = {
   javascript: JavascriptEnvironment,
 };
 
-const CodeRunner = ({ code, selectedLang }: CodeRunnerProps) => {
+const CodeRunner = ({ code, lang }: CodeRunnerProps) => {
   const [outputText, setOutputText] = useState<string[]>([]);
   const [errorText, setErrorText] = useState("");
   const [stackTrace, setStackTrace] = useState("");
@@ -21,6 +21,8 @@ const CodeRunner = ({ code, selectedLang }: CodeRunnerProps) => {
   const [isRunning, setIsRunning] = useState(false);
   const output = useRef();
   const canvas = useRef();
+
+  const LanguageEnvironment = langMapping[lang];
 
   const handleUpdateOutput = async (output: string) => {
     await setOutputText((prev) => [...prev, output]);
@@ -50,8 +52,6 @@ const CodeRunner = ({ code, selectedLang }: CodeRunnerProps) => {
     setErrorText("");
     setStackTrace("");
   };
-
-  let LanguageEnvironment = () => langMapping[selectedLang];
 
   return (
     <>
