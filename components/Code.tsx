@@ -1,19 +1,14 @@
 import SyntaxHighlighter from "react-syntax-highlighter";
 
 interface CodeProps {
-  document: {
-    value: {
-      key: string;
-      _type: string;
-      code: string;
-    };
-  };
+  code: string;
+  lang?: string;
 }
 
-export const Code = ({ document }: CodeProps) => {
+export const Code = ({ code, lang }: CodeProps) => {
   return (
-    <SyntaxHighlighter language="python">
-      {document?.value?.code}
+    <SyntaxHighlighter language={lang || "javascript"}>
+      {code}
     </SyntaxHighlighter>
   );
 };
