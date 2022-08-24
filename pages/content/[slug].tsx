@@ -51,7 +51,7 @@ export default function Content({ content }: contentProps) {
 
       {content && (
         <>
-          <h1>{content.title}</h1>
+          <h1 className="text-4xl font-bold leading-tight">{content.title}</h1>
           <article>
             {content?.body && (
               <PortableText value={content?.body} components={components} />

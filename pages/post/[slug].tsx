@@ -51,9 +51,11 @@ export default function Post({ post }: PostProps) {
 
       {post && (
         <>
-          <h1>{post.title}</h1>
+          <h1 className="text-4xl font-bold leading-tight">{post.title}</h1>
           <p>
-            <span>{post?.author?.name}</span>
+            <span className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
+              {post?.author?.name}
+            </span>
             <br />
             <span>{new Date(post._createdAt).toLocaleDateString()}</span>
           </p>
@@ -75,7 +77,7 @@ export async function getStaticProps({ params }: Context) {
   // Fuck this shit.  Apparently, destructuring in GROQ works in the opposite direction from JS.  Ick.
   const posts = await client
     .fetch(
-      `*[_type == "post" && "${params.slug}" == slug.current]{
+      groq`*[_type == "post" && "${params.slug}" == slug.current]{
         _createdAt,
         body[]{
           _type == 'videoBlogPost' => {
