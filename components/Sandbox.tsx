@@ -1,11 +1,27 @@
 import { languageOptions } from "languageOptions";
 import React, { useState } from "react";
+import stripIndent from "strip-indent";
 import { CodeEditor } from "./CodeEditor";
 import CodeRunner from "./CodeRunner";
 
-const Sandbox = () => {
-  const [code, setCode] = useState("");
+interface SandboxProps {
+  initialCode?: string;
+}
+
+const Sandbox = ({ initialCode }: SandboxProps) => {
   const [lang, setLang] = useState<languageOptions>("javascript");
+  const [code, setCode] = useState(
+    initialCode || lang === "javascript"
+      ? stripIndent(`
+        p5.setup = function(){
+          
+        }
+
+        p5.draw = function(){
+
+        }`)
+      : ""
+  );
   return (
     <div>
       {/* pick language */}
@@ -29,7 +45,7 @@ const Sandbox = () => {
       </div>
 
       <div id="sandbox">
-        <CodeEditor setCode={setCode} lang={lang} />
+        <CodeEditor setCode={setCode} lang={lang} code={code} />
         <CodeRunner code={code} lang={lang} />
       </div>
     </div>

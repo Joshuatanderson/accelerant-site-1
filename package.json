@@ -49,6 +49,7 @@
     "react-typography": "^0.16.20",
     "sass": "^1.51.0",
     "skulpt": "^1.2.0",
+    "strip-indent": "^4.0.0",
     "typeface-quattrocento-sans": "^1.1.13",
     "typeface-work-sans": "^1.1.13",
     "typography": "^0.16.21",

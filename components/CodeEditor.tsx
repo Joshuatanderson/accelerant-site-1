@@ -12,6 +12,7 @@ import { languageOptions } from "languageOptions";
 interface CodeEditorProps {
   setCode: (code: string) => void;
   lang: languageOptions;
+  code: string;
 }
 
 const langMap = {
@@ -20,7 +21,7 @@ const langMap = {
 };
 
 //dev.to/adamcollier/adding-codemirror-6-to-a-react-project-36hl
-export const CodeEditor = ({ setCode, lang }: CodeEditorProps) => {
+export const CodeEditor = ({ setCode, lang, code }: CodeEditorProps) => {
   const editor = useRef();
 
   const onUpdate = EditorView.updateListener.of((v) => {
@@ -29,17 +30,7 @@ export const CodeEditor = ({ setCode, lang }: CodeEditorProps) => {
 
   useEffect(() => {
     const startState = EditorState.create({
-      doc:
-        lang === "javascript"
-          ? `p5.setup = function(){
-  
-}
-
-p5.draw = function(){
-
-}
-      `
-          : `print("hello world")`,
+      doc: code,
       extensions: [
         basicSetup,
         //@ts-ignore
