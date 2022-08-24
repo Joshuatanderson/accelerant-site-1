@@ -173,7 +173,7 @@ export const JavascriptEnvironment = ({
       eval(code);
     };
 
-    // let y = getHeight();
+    // let y = 400;
 
     // // The statements in the setup() function
     // // execute once when the program begins
@@ -191,9 +191,9 @@ export const JavascriptEnvironment = ({
     //   background(50); // Set the background to dark grey
     //   y = y - 1;
     //   if (y < 0) {
-    //     y = getHeight();
+    //     y = height();
     //   }
-    //   line(0, y, getWidth(), y);
+    //   line(0, y, width(), y);
     // };
 
     // this is done to replicate console logs to the output
