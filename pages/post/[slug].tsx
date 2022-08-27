@@ -7,9 +7,8 @@ import { useNextSanityImage } from "next-sanity-image";
 import { client } from "../../utils/sanity";
 import { SanityDocument } from "@sanity/client";
 import { Skeleton } from "@mui/material";
-import VideoBlogPost from "../../components/VideoBlogPost";
 import groq from "groq";
-import Sandbox from "../../components/Sandbox";
+import { portableTextComponents } from "../../utils/portableTextComponents";
 
 interface PostProps {
   post: SanityDocument;
@@ -21,35 +20,8 @@ interface Context {
   };
 }
 
-const components = {
-  types: {
-    videoBlogPost: (document: SanityDocument) => {
-      return <VideoBlogPost document={document} />;
-    },
-    // code: (document: any) => <Code document={document} />,
-    image: (document: SanityDocument) => {
-      console.log(document);
-      const imageProps = useNextSanityImage(client, document?.value?.asset);
-
-      // const imageProps = useNextSanityImage(client, post?.mainImage);
-
-      return <Image {...imageProps} width={1} height={1} layout="responsive" />;
-    },
-    codeExtended: (document: SanityDocument) => (
-      <Sandbox initialCode={document?.value?.code?.code} />
-    ),
-    undefined: (document: any) => {
-      {
-        console.warn("undefined type");
-        return null;
-      }
-    },
-  },
-};
-
 export default function Post({ post }: PostProps) {
-  console.log(post?.mainImage);
-  const imageProps = useNextSanityImage(client, post?.mainImage);
+  const imageProps: any = useNextSanityImage(client, post?.mainImage);
 
   return (
     <Layout title="Blog" rootPath="/blog">
@@ -75,7 +47,10 @@ export default function Post({ post }: PostProps) {
           </p>
           <article>
             {post?.body && (
-              <PortableText value={post?.body} components={components} />
+              <PortableText
+                value={post?.body}
+                components={portableTextComponents}
+              />
             )}
           </article>
           <Image {...imageProps} width={1} height={1} layout="responsive" />;
@@ -128,10 +103,6 @@ export async function getStaticProps({ params }: Context) {
   };
 }
 
-interface slug {
-  current: string;
-}
-
 export async function getStaticPaths(slug: string) {
   const posts = await client
     .fetch(
@@ -142,10 +113,6 @@ export async function getStaticPaths(slug: string) {
     )
     .catch((err) => console.error(err));
   const postSlugs = posts.map((post: SanityDocument) => post.slug);
-  // const paths = await client.fetch(
-  //   `*[_type == "post" && slugFieldName.current == ${slug}]`
-  // );
-
   return {
     paths: postSlugs.map((slug: slug) => ({
       params: {

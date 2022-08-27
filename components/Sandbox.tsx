@@ -6,11 +6,12 @@ import CodeRunner from "./CodeRunner";
 
 interface SandboxProps {
   initialCode?: string;
+  language?: languageOptions;
 }
 
-const Sandbox = ({ initialCode }: SandboxProps) => {
+const Sandbox = ({ initialCode, language }: SandboxProps) => {
   console.log(initialCode);
-  const [lang, setLang] = useState<languageOptions>("javascript");
+  const [lang, setLang] = useState<languageOptions>(language || "javascript");
   const [code, setCode] = useState(
     initialCode
       ? initialCode

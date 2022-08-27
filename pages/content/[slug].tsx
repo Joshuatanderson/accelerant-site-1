@@ -11,6 +11,7 @@ import VideoBlogPost from "../../components/VideoBlogPost";
 import groq from "groq";
 import { Code } from "../../components/Code";
 import Sandbox from "../../components/Sandbox";
+import { portableTextComponents } from "../../utils/portableTextComponents";
 
 interface contentProps {
   content: SanityDocument;
@@ -22,34 +23,8 @@ interface Context {
   };
 }
 
-const components = {
-  types: {
-    videoBlogPost: (document: SanityDocument) => (
-      <VideoBlogPost document={document} />
-    ),
-    codeExtended: (document) => {
-      // if (document?.value?.isSandbox) {
-      console.log("is sandbox ");
-      return <Sandbox initialCode={"hello world"} />;
-      // } else {
-      //   console.log("is not sandbox");
-      //   return <Code code={document?.value?.code} />;
-      // }
-    },
-    // mark: {
-    //   a: ({value,}) => <a href={value?.href} target={target}>{children}</a>
-    // }
-    // undefined: () => {
-    //   {
-    //     console.log("undefined type");
-    //     return null;
-    //   }
-    // },
-  },
-};
-
 export default function Content({ content }: contentProps) {
-  const imageProps = useNextSanityImage(client, content?.mainImage);
+  const imageProps: any = useNextSanityImage(client, content?.mainImage);
   console.log(content);
   return (
     <Layout title="Content" rootPath="/content">
@@ -68,7 +43,10 @@ export default function Content({ content }: contentProps) {
           <h1 className="text-4xl font-bold leading-tight">{content.title}</h1>
           <article>
             {content?.body && (
-              <PortableText value={content?.body} components={components} />
+              <PortableText
+                value={content?.body}
+                components={portableTextComponents}
+              />
             )}
           </article>
           {imageProps && (
@@ -85,18 +63,24 @@ export async function getStaticProps({ params }: Context) {
   const contents = await client
     .fetch(
       groq`*[_type == "post" && "${params.slug}" == slug.current]{
+        _createdAt,
         body[]{
           _type == 'videoBlogPost' => {
             ...,
             video{asset->},
             _type,
           },
-          _type != 'videoBlogPost' => {
+          _type == "image" => {
+            ...,
+            asset->,
+            _type,
+          },
+          _type != 'videoBlogPost' && _type != "image" => {
             ...
           },
         },
         title,
-        category,
+        author->,
         mainImage{asset->{_id,url}},
       }`
     )
@@ -115,10 +99,6 @@ export async function getStaticProps({ params }: Context) {
       content: JSON.parse(stringifiedContent),
     },
   };
-}
-
-interface slug {
-  current: string;
 }
 
 export async function getStaticPaths(slug: string) {

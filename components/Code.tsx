@@ -7,8 +7,6 @@ interface CodeProps {
 
 export const Code = ({ code, lang }: CodeProps) => {
   return (
-    <SyntaxHighlighter language={lang || "javascript"}>
-      {code}
-    </SyntaxHighlighter>
+    <SyntaxHighlighter language={lang || "python"}>{code}</SyntaxHighlighter>
   );
 };
