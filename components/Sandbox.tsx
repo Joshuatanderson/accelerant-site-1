@@ -9,9 +9,12 @@ interface SandboxProps {
 }
 
 const Sandbox = ({ initialCode }: SandboxProps) => {
+  console.log(initialCode);
   const [lang, setLang] = useState<languageOptions>("javascript");
   const [code, setCode] = useState(
-    initialCode || lang === "javascript"
+    initialCode
+      ? initialCode
+      : lang === "javascript"
       ? stripIndent(`
         p5.setup = function(){
           
@@ -20,6 +23,8 @@ const Sandbox = ({ initialCode }: SandboxProps) => {
         p5.draw = function(){
 
         }`)
+      : lang === "python"
+      ? "print('hello world')"
       : ""
   );
   return (

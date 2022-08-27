@@ -9,7 +9,7 @@ import { SanityDocument } from "@sanity/client";
 import { Skeleton } from "@mui/material";
 import VideoBlogPost from "../../components/VideoBlogPost";
 import groq from "groq";
-import { Code } from "../../components/Code";
+import Sandbox from "../../components/Sandbox";
 
 interface PostProps {
   post: SanityDocument;
@@ -23,8 +23,21 @@ interface Context {
 
 const components = {
   types: {
-    videoBlogPost: (document: any) => <VideoBlogPost document={document} />,
-    code: (document: any) => <Code document={document} />,
+    videoBlogPost: (document: SanityDocument) => {
+      return <VideoBlogPost document={document} />;
+    },
+    // code: (document: any) => <Code document={document} />,
+    image: (document: SanityDocument) => {
+      console.log(document);
+      const imageProps = useNextSanityImage(client, document?.value?.asset);
+
+      // const imageProps = useNextSanityImage(client, post?.mainImage);
+
+      return <Image {...imageProps} width={1} height={1} layout="responsive" />;
+    },
+    codeExtended: (document: SanityDocument) => (
+      <Sandbox initialCode={document?.value?.code?.code} />
+    ),
     undefined: (document: any) => {
       {
         console.warn("undefined type");
@@ -35,6 +48,7 @@ const components = {
 };
 
 export default function Post({ post }: PostProps) {
+  console.log(post?.mainImage);
   const imageProps = useNextSanityImage(client, post?.mainImage);
 
   return (
@@ -64,9 +78,7 @@ export default function Post({ post }: PostProps) {
               <PortableText value={post?.body} components={components} />
             )}
           </article>
-          {imageProps && (
-            <Image {...imageProps} width={1} height={1} layout="responsive" />
-          )}
+          <Image {...imageProps} width={1} height={1} layout="responsive" />;
         </>
       )}
     </Layout>
@@ -85,7 +97,12 @@ export async function getStaticProps({ params }: Context) {
             video{asset->},
             _type,
           },
-          _type != 'videoBlogPost' => {
+          _type == "image" => {
+            ...,
+            asset->,
+            _type,
+          },
+          _type != 'videoBlogPost' && _type != "image" => {
             ...
           },
         },

@@ -10,6 +10,7 @@ import { Skeleton } from "@mui/material";
 import VideoBlogPost from "../../components/VideoBlogPost";
 import groq from "groq";
 import { Code } from "../../components/Code";
+import Sandbox from "../../components/Sandbox";
 
 interface contentProps {
   content: SanityDocument;
@@ -23,20 +24,33 @@ interface Context {
 
 const components = {
   types: {
-    videoBlogPost: (document: any) => <VideoBlogPost document={document} />,
-    code: (document: any) => <Code document={document} />,
-    undefined: (document: any) => {
-      {
-        console.log("undefined type");
-        return null;
-      }
+    videoBlogPost: (document: SanityDocument) => (
+      <VideoBlogPost document={document} />
+    ),
+    codeExtended: (document) => {
+      // if (document?.value?.isSandbox) {
+      console.log("is sandbox ");
+      return <Sandbox initialCode={"hello world"} />;
+      // } else {
+      //   console.log("is not sandbox");
+      //   return <Code code={document?.value?.code} />;
+      // }
     },
+    // mark: {
+    //   a: ({value,}) => <a href={value?.href} target={target}>{children}</a>
+    // }
+    // undefined: () => {
+    //   {
+    //     console.log("undefined type");
+    //     return null;
+    //   }
+    // },
   },
 };
 
 export default function Content({ content }: contentProps) {
   const imageProps = useNextSanityImage(client, content?.mainImage);
-
+  console.log(content);
   return (
     <Layout title="Content" rootPath="/content">
       {!content && (
