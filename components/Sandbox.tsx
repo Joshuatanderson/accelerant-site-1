@@ -17,11 +17,11 @@ const Sandbox = ({ initialCode, language }: SandboxProps) => {
       ? initialCode
       : lang === "javascript"
       ? stripIndent(`
-        p5.setup = function(){
+        graphics.setup = function(){
           
         }
 
-        p5.draw = function(){
+        graphics.draw = function(){
 
         }`)
       : lang === "python"

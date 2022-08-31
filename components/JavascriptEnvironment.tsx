@@ -8,6 +8,54 @@ interface JavascriptEnvironmentProps {
   isRunning: boolean;
   setIsRunning: (newValue: boolean) => void;
 }
+const functionsToExtract = [
+  "mousePressed",
+  "mouseReleased",
+  "mouseMoved",
+  "mouseDragged",
+  "mouseClicked",
+  "mouseWheel",
+  "keyPressed",
+  "keyReleased",
+  "createCanvas",
+  "resizeCanvas",
+  "createP",
+  "createcanvasContainer",
+  "resizecanvasContainer",
+  "bezier",
+  "redraw",
+  "loop",
+  "random",
+  "createVector",
+  "fill",
+  "stroke",
+  "noStroke",
+  "frameRate",
+  "noLoop",
+  "noFill",
+  "background",
+  "line",
+  "keyTyped",
+  "touchStarted",
+  "touchMoved",
+  "touchEnded",
+  "touchCancelled",
+  "deviceMoved",
+  "deviceTurned",
+  "deviceShaken",
+  "keyDown",
+  "keyUp",
+  "mouseDown",
+  // "circle",
+  "ellipse",
+  "mouseUp",
+  "textSize",
+  "text",
+  "textAlign",
+  "mouseOut",
+  "mouseOver",
+  "windowResized",
+];
 
 export const JavascriptEnvironment = ({
   code,
@@ -18,9 +66,11 @@ export const JavascriptEnvironment = ({
   isRunning,
 }: JavascriptEnvironmentProps) => {
   const [p5, setP5] = useState<any>();
+  // let extractedFunctions;
+  // const [extractedFunctions, setExtractedFunctions] = useState<any>();
 
-  const createNewP5 = async (
-    sketch: (p5: any) => Promise<void>,
+  const createNewgraphics = async (
+    sketch: (graphics: any) => Promise<void>,
     canvasContainer: any
   ) => {
     new p5(sketch, canvasContainer);
@@ -29,14 +79,21 @@ export const JavascriptEnvironment = ({
   const canvasContainer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const importP5 = async () => {
-      const p5 = await (await import("p5")).default;
+    const importgraphics = async () => {
+      const graphics = await (await import("p5")).default;
       // https://github.com/facebook/react/issues/21057
-      await setP5(() => p5);
+      await setP5(() => graphics);
       // @ts-ignore
-      // window.p5 = p5;
+      // window.graphics = graphics;
     };
-    importP5();
+    // const extractFunctions = async () => {
+    //   await setExtractedFunctions(
+
+    //   );
+    // };
+    importgraphics();
+    // extractFunctions();
+    // console.log(extractedFunctions?.fill);
   }, []);
 
   const outputLines: string[] = [];
@@ -45,69 +102,39 @@ export const JavascriptEnvironment = ({
     if (!isRunning) {
       return;
     }
+
+    // const extractedFunctions = Object.fromEntries(
+    //   new Map(
+    //     functionsToExtract.map((name) => [
+    //       name,
+    //       function () {
+    //         // const proto = Object.getPrototypeOf(graphics);
+    //         // some functions aren't working. This seems to be something with how JS
+    //         // deals with prototype inheritance. graphics.circle is valid. graphics["circle"] isn't?
+    //         graphics[name](...arguments);
+    //       },
+    //     ])
+    //   )
+    // );
+
     /***
-     * p5: p5 instance
+     * graphics: graphics instance
      */
-    let sketch = async function (p5: any) {
+    let sketch = async function (graphics: any) {
       // @dev
       // This is done as sugar syntax
-      // Instead of users needing to access p5 functions as "p5.stroke()"
+      // Instead of users needing to access graphics functions as "graphics.stroke()"
       // functions can be accessed at stroke()
-      // the draw, setup, and preload functions still need to be accessed as p5.draw, p5.setup, etc.
+      // the draw, setup, and preload functions still need to be accessed as graphics.draw, graphics.setup, etc.
 
-      const functionsToExtract = [
-        "mousePressed",
-        "mouseReleased",
-        "mouseMoved",
-        "mouseDragged",
-        "mouseClicked",
-        "mouseWheel",
-        "keyPressed",
-        "keyReleased",
-        "createCanvas",
-        "resizeCanvas",
-        "createP",
-        "createcanvasContainer",
-        "resizecanvasContainer",
-        "bezier",
-        "redraw",
-        "loop",
-        "random",
-        "createVector",
-        "fill",
-        "stroke",
-        "noStroke",
-        "frameRate",
-        "noLoop",
-        "noFill",
-        "background",
-        "line",
-        "keyTyped",
-        "touchStarted",
-        "touchMoved",
-        "touchEnded",
-        "touchCancelled",
-        "deviceMoved",
-        "deviceTurned",
-        "deviceShaken",
-        "keyDown",
-        "keyUp",
-        "mouseDown",
-        "ellipse",
-        "mouseUp",
-        "textSize",
-        "text",
-        "textAlign",
-        "mouseOut",
-        "mouseOver",
-        "windowResized",
-      ];
       const extractedFunctions = Object.fromEntries(
         new Map(
           functionsToExtract.map((name) => [
             name,
             function () {
-              p5[name](...arguments);
+              // some functions aren't working. This seems to be something with how JS
+              // deals with prototype inheritance. graphics.circle is valid. graphics["circle"] isn't?
+              graphics[name](...arguments);
             },
           ])
         )
@@ -161,14 +188,20 @@ export const JavascriptEnvironment = ({
         createVector,
       } = extractedFunctions;
 
-      const width = () => p5.width;
-      const height = () => p5.height;
-      const mouseX = () => p5.mouseX;
-      const mouseY = () => p5.mouseY;
-      const CENTER = () => p5.CENTER;
-      const RIGHT = () => p5.RIGHT;
-      const LEFT = () => p5.LEFT;
-      const Vector = () => new p5.constructor.Vector();
+      const width = () => graphics.width;
+      const height = () => graphics.height;
+      const mouseX = () => graphics.mouseX;
+      const mouseY = () => graphics.mouseY;
+      const CENTER = () => graphics.CENTER;
+      const RIGHT = () => graphics.RIGHT;
+      const LEFT = () => graphics.LEFT;
+      const Vector = () => new graphics.constructor.Vector();
+      const circle = function () {
+        graphics.circle(...arguments);
+      };
+      const rect = function () {
+        graphics.rect(...arguments);
+      };
 
       eval(code);
     };
@@ -177,7 +210,7 @@ export const JavascriptEnvironment = ({
 
     // // The statements in the setup() function
     // // execute once when the program begins
-    // p5.setup = () => {
+    // graphics.setup = () => {
     //   // createCanvas must be the first statement
     //   createCanvas(720, 400);
     //   stroke(255); // Set line drawing color to white
@@ -187,7 +220,7 @@ export const JavascriptEnvironment = ({
     // // program is stopped. Each statement is executed in
     // // sequence and after the last line is read, the first
     // // line is executed again.
-    // p5.draw = () => {
+    // graphics.draw = () => {
     //   background(50); // Set the background to dark grey
     //   y = y - 1;
     //   if (y < 0) {
@@ -209,7 +242,7 @@ export const JavascriptEnvironment = ({
     };
 
     try {
-      createNewP5(sketch, canvasContainer.current);
+      createNewgraphics(sketch, canvasContainer.current);
 
       for (const i in outputLines) {
         handleUpdateOutput(outputLines[i]);
@@ -224,7 +257,7 @@ export const JavascriptEnvironment = ({
     // @ts-ignore
     console.log = console.unmodifiedLog;
 
-    // clears old p5 canvases
+    // clears old graphics canvases
     return () => {
       //@ts-ignore
       for (let i = 0; i < canvasContainer.current.children.length; i++) {

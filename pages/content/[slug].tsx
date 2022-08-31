@@ -25,7 +25,6 @@ interface Context {
 
 export default function Content({ content }: contentProps) {
   const imageProps: any = useNextSanityImage(client, content?.mainImage);
-  console.log(content);
   return (
     <Layout title="Content" rootPath="/content">
       {!content && (
