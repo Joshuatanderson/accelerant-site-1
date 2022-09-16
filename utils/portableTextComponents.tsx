@@ -23,13 +23,16 @@ export const portableTextComponents = {
       return <Image {...imageProps} width={1} height={1} layout="responsive" />;
     },
     codeExtended: (document: SanityDocument) => {
-      console.log(document);
       if (document?.value?.isSandbox) {
         return (
-          <Sandbox
-            language={document?.value?.code?.language}
-            initialCode={document?.value?.code?.code}
-          />
+          <Sandbox isP5={true} />
+
+          // <Sandbox
+          //   language={document?.value?.code?.language}
+          //   initialCode={document?.value?.code?.code}
+          //   file={document?.value?.file}
+          //   isP5={document?.value?.isP5}
+          // />
         );
       } else {
         return (
@@ -42,7 +45,6 @@ export const portableTextComponents = {
     },
     // backwards compatible. Remove eventually and replace with codeExtended
     code: (document: SanityDocument) => {
-      console.log(document);
       return <Code code={document?.value?.code} />;
     },
     undefined: (document: any) => {

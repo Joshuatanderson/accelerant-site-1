@@ -22,7 +22,7 @@ const sandbox = () => {
         </div>
       </div>
 
-      <Sandbox />
+      <Sandbox isP5={true} />
     </>
   );
 };

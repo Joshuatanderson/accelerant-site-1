@@ -9,6 +9,8 @@ import { SanityDocument } from "@sanity/client";
 import { Skeleton } from "@mui/material";
 import groq from "groq";
 import { portableTextComponents } from "../../utils/portableTextComponents";
+import Sandbox from "../../components/Sandbox";
+import Script from "next/script";
 
 interface PostProps {
   post: SanityDocument;
@@ -25,6 +27,7 @@ export default function Post({ post }: PostProps) {
 
   return (
     <Layout title="Blog" rootPath="/blog">
+      <Sandbox isP5={true} />
       {!post && (
         <>
           <Skeleton variant="text" height={50} animation="wave" />
@@ -53,6 +56,16 @@ export default function Post({ post }: PostProps) {
               />
             )}
           </article>
+          {/* <script
+            type="text/p5"
+            data-p5-version="1.4.2"
+            data-autoplay
+            data-height="600"
+            data-preview-width="600"
+            // @ts-ignore
+            // src={file}
+            // src={new File([new Blob([code])], "code.js", { type: "text/javascript" })}
+          /> */}
           <Image {...imageProps} width={1} height={1} layout="responsive" />;
         </>
       )}

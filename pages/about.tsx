@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useMemo } from "react";
 import Partners from "../components/Partners";
+import Sandbox from "../components/Sandbox";
 import Team from "../components/Team";
 
 const About = () => {
   return (
     <div>
+      {true && <Sandbox isP5 />}
       <div className="mx-auto py-4 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
         {/* <div className="space-y-12"> */}
         <h1 className="text-4xl font-bold leading-tight">About</h1>
